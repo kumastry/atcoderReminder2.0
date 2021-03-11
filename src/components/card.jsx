@@ -10,7 +10,6 @@ function Card(props) {
         background="#ffffff";
     }
 
-
     return(
         <div className="card" style={{ margin: "8px", backgroundColor:background,}}>
             <div className="card-content" >
@@ -19,6 +18,8 @@ function Card(props) {
 
                         {props.array.contest + " " +props.array.title}<br/>
                         { "diff:" + props.array.diff + " submission:" + props.array.sub}<br/>
+                        {props.array.version}
+
                     </a>
                 </p>
 

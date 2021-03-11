@@ -12,18 +12,17 @@ function Form(props) {
 
     let userName_tmp = props.userName;
     useEffect (() => {
-        console.log('44444');
+       
         const dataref = db.collection('problems').doc(props.uid);
         dataref.get().then((doc) => {
-            console.log('555555')
+        
             console.log(doc.data());
             if(doc.exists) {
                 const dbData = doc.data();
-                console.log('666666');
+           
                 console.log(dbData.problems);
                 if(dbData.problems===undefined) {
                     db.collection("problems").doc(props.uid).set({})
-                    console.log('###');
                 } else  {
                     console.log(dbData.problems);
                     setProblems(dbData.problems);
@@ -35,8 +34,8 @@ function Form(props) {
     },[])
 
     useEffect (() => {
-
         if(problems[0] !== 'init') {
+            console.log("fff")
             db.collection("problems").doc(props.uid).set({problems})
             .then(() => {
                 console.log(problems);
@@ -48,11 +47,7 @@ function Form(props) {
         }
     },[problems])
 
-    function handleChange(event) {
-        setProblemUrl(event.target.value);
-    }
-
-    function addProblem(event) {
+    function addProblem() {
         let tmp = problems.slice(0, problems.length);
         const urlsplit = problemUrl.split('/');
         const problem_Id_tmp = urlsplit[urlsplit.length-1];
@@ -105,7 +100,8 @@ function Form(props) {
                             problem_id:problem_Id_tmp,
                             contest:contest_tmp,
                             sub:sub_tmp,
-                            user:userName_tmp
+                            user:userName_tmp,
+                            version:0
                         };
 
                         tmp.unshift(problem_Obj);
@@ -121,11 +117,6 @@ function Form(props) {
         setProblemUrl('');
     }
 
-    function handlePress(event) {
-        if(event.key === 'Enter') {
-            addProblem();
-        }
-    }
     
     function deleteTask(key) {
         let tmp = problems.slice(0, problems.length);
@@ -133,22 +124,62 @@ function Form(props) {
         setProblems(tmp);
     }
 
+    const reLoad = () => {
+        console.log(problems);
+        let userNames = [];
+        problems.map((t) => {
+            userNames.push(t.user);
+        });
+
+        userNames = [...new Set(userNames)];
+        let tmp = problems.slice(0, problems.length);;
+        
+        userNames.map((t1) => {
+            fetchUesrsSub(t1).then((data) => {
+            tmp.map((t2) => {
+                    
+                    data.map((t3) => {
+                        
+                        if(t2.problem_id === t3.problem_id) {
+                            t2.sub = t3.result;
+                            t2.version++;
+                            console.log(t3);
+                        } 
+
+                    })
+                })
+            })
+        })
+
+        setProblems(tmp);
+        console.log(problems);
+    }
+
 
     return(
         <div>
             <main>
 
-                  <button class="button">
-    <span class="icon is-small">
-      <i class="fas fa-underline"></i>
-    </span>
-  </button>
 
             <section className="section">
-                <input className="input" type="text" placeholder="Problem URL" value = {problemUrl} onChange={handleChange} onKeyPress={handlePress} />
+                <button className="button" onClick={reLoad}style={{float:"left" }}>
+                        <span class="icon">
+                            <i class="fas fa-underline"></i>
+                        </span>
+                        <span>Reload</span>
+                </button>
+
+
+                <input className="input" 
+                type="text" 
+                placeholder="Problem URL" 
+                value = {problemUrl} 
+                onChange={(e) => setProblemUrl(e.target.value)} 
+                onKeyPress={(e) => {e.key == 'Enter'?addProblem():""}} 
+                />
+
                 <button className="button is-fullwidth is-success is-light" onClick={addProblem}>Add Problem</button>
 
-           
                 <div className="select is-success is-active ">
                     <select  onChange={(e) => setSubFilter(e.target.value)}>
                         <option value='all' >submission-All</option>
@@ -162,7 +193,7 @@ function Form(props) {
                 <div className="select is-success is-active">
                     <select onChange={(e) => setDiffFilter(e.target.value)}>
                         <option value='all'>diffculity-All</option>
-                        <option value='gray'>-400</option>
+                        <option value='gray'>0-400</option>
                         <option value='brawn'>400-800</option>
                         <option value='green'>800-1200</option>
                         <option value='cyan'>1200-1600</option>
@@ -173,7 +204,7 @@ function Form(props) {
                     </select>
                 </div>
 
-              
+
                
                 <section className="section">
                     <ProblemSet array={problems} deleteTask={deleteTask} diffFilter = {diffFilter} subFilter={subFilter}/>

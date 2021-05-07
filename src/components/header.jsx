@@ -5,7 +5,7 @@ function Header() {
                 <div className="hero-body">
                     <div className="container">
                         <h1 className="title is-3">
-                        AtCoder Reminder
+                        AtCoder Remfinder
                      </h1>
                  </div>
                 </div>

@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
 import {fetchPromDiff, fetchPromInfo, fetchUesrsSub} from '../main/api';
-import { db } from '../firebase';
 import ProblemSet from './problemset';
 
 function Form(props) {
@@ -12,38 +11,16 @@ function Form(props) {
 
     let userName_tmp = props.userName;
     useEffect (() => {
-       
-        const dataref = db.collection('problems').doc(props.uid);
-        dataref.get().then((doc) => {
-        
-            console.log(doc.data());
-            if(doc.exists) {
-                const dbData = doc.data();
-           
-                console.log(dbData.problems);
-                if(dbData.problems===undefined) {
-                    db.collection("problems").doc(props.uid).set({})
-                } else  {
-                    console.log(dbData.problems);
-                    setProblems(dbData.problems);
-                }
-            } else {
-                console.log("no data");
-            }
-        });
+        if(localStorage.array){ 
+            const saveDate = JSON.parse(localStorage.array);
+            setProblems(saveDate);
+        }        
     },[])
 
     useEffect (() => {
+      
         if(problems[0] !== 'init') {
-            console.log("fff")
-            db.collection("problems").doc(props.uid).set({problems})
-            .then(() => {
-                console.log(problems);
-                console.log("Document written ");
-            })
-            .catch((error) => {
-                console.error("Error adding document: ", error);
-            });
+            localStorage.setItem('array', JSON.stringify(problems));
         }
     },[problems])
 
@@ -165,7 +142,6 @@ function Form(props) {
                         </span>
                         <span>Reload</span>
                 </button>
-
 
                 <input className="input" 
                 type="text" 

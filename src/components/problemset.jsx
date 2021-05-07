@@ -49,7 +49,7 @@ function ProblemSet(props) {
         <div>
             <div className="is-vertical-center" >       
                 {resArray.map( (array, key) => {
-                    return array !== 'init'?<Card array={array} id ={key} deleteTask={props.deleteTask} /> :<p>loading...</p>
+                    return array !== 'init'?<Card array={array} id ={key} deleteTask={props.deleteTask} /> :<p></p>
                 })}
             </div>
         </div>        

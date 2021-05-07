@@ -11,10 +11,7 @@ function Form(props) {
 
     let userName_tmp = props.userName;
     useEffect (() => {
-        if(localStorage.array){ 
-            const saveDate = JSON.parse(localStorage.array);
-            setProblems(saveDate);
-        }        
+          
     },[])
 
     useEffect (() => {

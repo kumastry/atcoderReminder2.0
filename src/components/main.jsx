@@ -23,7 +23,7 @@ function Main(props) {
                     <input className="navbar-item" id = 'userform' value = {userName} onChange={e => setUserName(e.target.value)} type="text" placeholder="Username"></input>
                 </div>
             </nav>
-            <Form userName = {userName} uid = {props.uid}/>
+            <Form userName = {userName}/>
         </div>
     );
 }

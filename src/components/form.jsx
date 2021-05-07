@@ -4,7 +4,7 @@ import ProblemSet from './problemset';
 
 function Form(props) {
     const [problemUrl, setProblemUrl] = useState('');
-    const [problems, setProblems] = useState(['init']);
+    const [problems, setProblems] = useState([]);
     const [subFilter, setSubFilter] = useState('all');
     const [diffFilter, setDiffFilter] = useState('all');
 
@@ -18,10 +18,7 @@ function Form(props) {
     },[])
 
     useEffect (() => {
-      
-        if(problems[0] !== 'init') {
-            localStorage.setItem('array', JSON.stringify(problems));
-        }
+        localStorage.setItem('array', JSON.stringify(problems));
     },[problems])
 
     function addProblem() {

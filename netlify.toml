@@ -2,4 +2,4 @@
 from = "https://atcoderreminder.netlify.app"
 to = "https://kenkoooo.com/atcoder/resources/problems.json"
 status = 200
-force = false
+force = true

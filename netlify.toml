@@ -1,0 +1,5 @@
+[[redirects]]
+from = "https://atcoderreminder.netlify.app"
+to = "https://kenkoooo.com/atcoder/resources/*"
+status = 200
+force = false

@@ -8,7 +8,7 @@ function Footer() {
     <footer className="footer">
         <div className="content has-text-centered">
             <hr></hr>
-                <p>2021&copy;kumastry</p>
+                <p>2f021&copy;kumastry</p>
               
                 
      

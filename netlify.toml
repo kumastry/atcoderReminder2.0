@@ -1,11 +1,11 @@
 [[redirects]]
-  from = "/api/*"
+  from = "https://atcoderreminder.netlify.app/"
   to = "https://kenkoooo.com/atcoder/resources/problems.json"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/api/*"
+  from = "https://atcoderreminder.netlify.app/"
   to = "https://kenkoooo.com/atcoder/resources/problem-models.json"
   status = 200
   force = true

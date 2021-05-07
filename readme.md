@@ -1,5 +1,5 @@
 # atcoderReminder
-サイトURL:https://kumastry.github.io/atcoderReminder/
+サイトURL:https://atcoderreminder.netlify.app
 
 # 概要
 このアプリはAtCoderの問題をリマインドできるwebアプリです．REST APIにより，リマインドした問題の情報(diffやユーザーのAC,WA状況)も表示することができます．

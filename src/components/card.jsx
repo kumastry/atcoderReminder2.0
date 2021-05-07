@@ -18,8 +18,6 @@ function Card(props) {
 
                         {props.array.contest + " " +props.array.title}<br/>
                         { "diff:" + props.array.diff + " submission:" + props.array.sub}<br/>
-                        {props.array.version}
-
                     </a>
                 </p>
 

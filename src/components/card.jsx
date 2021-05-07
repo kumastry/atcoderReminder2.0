@@ -16,7 +16,7 @@ function Card(props) {
                 <p className="title">
                     <a href = {props.array.url} target="_black">
 
-                        {props.array.contest + " " +props.array.title}<br/>
+                        {props.array.contest + " f" +props.array.title}<br/>
                         { "diff:" + props.array.diff + " submission:" + props.array.sub}<br/>
                     </a>
                 </p>

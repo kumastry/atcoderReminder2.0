@@ -137,15 +137,11 @@ function Form(props) {
         userNames.map((t1) => {
             fetchUesrsSub(t1).then((data) => {
             tmp.map((t2) => {
-                    
                     data.map((t3) => {
-                        
                         if(t2.problem_id === t3.problem_id) {
                             t2.sub = t3.result;
                             t2.version++;
-                            console.log(t3);
-                        } 
-
+                        }
                     })
                 })
             })
@@ -162,9 +158,10 @@ function Form(props) {
 
 
             <section className="section">
-                <button className="button" onClick={reLoad}style={{float:"left" }}>
+
+                <button className="button" onClick={reLoad} style={{float:"left" }}>
                         <span class="icon">
-                            <i class="fas fa-underline"></i>
+                            <i class="fas fa-redo"></i>
                         </span>
                         <span>Reload</span>
                 </button>
@@ -193,14 +190,14 @@ function Form(props) {
                 <div className="select is-success is-active">
                     <select onChange={(e) => setDiffFilter(e.target.value)}>
                         <option value='all'>diffculity-All</option>
-                        <option value='gray'>0-400</option>
-                        <option value='brawn'>400-800</option>
-                        <option value='green'>800-1200</option>
-                        <option value='cyan'>1200-1600</option>
-                        <option value='blue'>1600-2000</option>
-                        <option value='yellow'>2000-2400</option>
-                        <option value='orange'>2400-2800</option>
-                        <option value='red' style={{width:"80px", height:"80px", borderRadius: "50%",  background: "skyblue"}}>2800-</option>
+                        <option value='gray'>0-400(gray)</option>
+                        <option value='brawn'>400-800(brawn)</option>
+                        <option value='green'>800-1200(green)</option>
+                        <option value='cyan'>1200-1600(cyan)</option>
+                        <option value='blue'>1600-2000(blue)</option>
+                        <option value='yellow'>2000-2400(yellow)</option>
+                        <option value='orange'>2400-2800(orange)</option>
+                        <option value='red'>2800-∞(red)</option>
                     </select>
                 </div>
 

@@ -134,9 +134,6 @@ function Form(props) {
             <section className="section">
 
                 <button className="button" onClick={reLoad} style={{float:"left" }}>
-                        <span class="icon">
-                            <i class="fas fa-redo"></i>
-                        </span>
                         <span>Reload</span>
                 </button>
 

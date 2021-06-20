@@ -93,7 +93,7 @@ function Form(props) {
 
     
     function deleteTask(key) {
-        let tmp = problems.slice(0, problems.length);
+        let tmp = [...problems];
         tmp.splice(key, 1);
         setProblems(tmp);
     }
@@ -106,7 +106,7 @@ function Form(props) {
         });
 
         userNames = [...new Set(userNames)];
-        let tmp = problems.slice(0, problems.length);;
+        let tmp = [...problems];
         
         userNames.map((t1) => {
             fetchUesrsSub(t1).then((data) => {

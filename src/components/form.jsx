@@ -48,21 +48,20 @@ function Form(props) {
             usersSub.map((item) => {
                 if(item.problem_id === problem_Id_tmp) {
                     if(sub_tmp === 'nosub') {
-                        sub_tmp = url3.result;
-                    } else if(sub_tmp !== 'AC' && url3.result === 'AC') {
-                        sub_tmp = url3.result;
+                        sub_tmp = item.result;
+                    } else if(sub_tmp !== 'AC' && item.result === 'AC') {
+                        sub_tmp = item.result;
                     } else if(sub_tmp !== 'AC') {
-                        if(sub_tmp !== 'WA' && url3.result === 'WA') {
-                            sub_tmp = url3.result;
-                        } else if(sub_tmp !== 'TLE' && url3.result === 'TLE') {
-                            sub_tmp = url3.result;
+                        if(sub_tmp !== 'WA' && item.result === 'WA') {
+                            sub_tmp = item.result;
+                        } else if(sub_tmp !== 'TLE' && item.result === 'TLE') {
+                            sub_tmp = item.result;
                         } else {
-                            sub_tmp = url3.result;
+                            sub_tmp = item.result;
                         }
                     }
                 }
             });
-
             
             const problem_Obj = {
                 title:Name_tmp,
@@ -74,7 +73,7 @@ function Form(props) {
                 user:userName_tmp,
                 version:0
             };
-
+            console.log(problem_Obj);
             tmp.unshift(problem_Obj);
             setProblems(tmp);
         } else {

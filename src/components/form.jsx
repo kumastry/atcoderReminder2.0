@@ -21,79 +21,72 @@ function Form(props) {
         localStorage.setItem('array', JSON.stringify(problems));
     },[problems])
 
-    function addProblem() {
-        let tmp = problems.slice(0, problems.length);
+    async function addProblem() {
+        let tmp = [...problems];
         const urlsplit = problemUrl.split('/');
         const problem_Id_tmp = urlsplit[urlsplit.length-1];
         const contest_tmp = urlsplit[urlsplit.length-3];
         let Name_tmp = '';
         let diff_tmp = 0;
         let sub_tmp = 'nosub';
+        let userName_tmp = props.userName ===''?'no user':props.userName;
+        const promInfo = await fetchPromInfo();
+       
+        console.log(promInfo);
+        promInfo.map((item) => {
+            if(item.id == problem_Id_tmp) {
+                Name_tmp = item.title;
+            }
+        });
 
-        fetchPromInfo().then((url1s) => {
+        if(Name_tmp !== '') {
+            const promDiff = await fetchPromDiff();
+            diff_tmp = typeof(promDiff[problem_Id_tmp]) === 'undefined'?0:promDiff[problem_Id_tmp]['difficulty'];
 
-            url1s.map((url1s) => {
-                if(url1s.id === problem_Id_tmp) {
-                    Name_tmp = url1s.title;
+            const usersSub = await fetchUesrsSub(userName_tmp);
+
+            usersSub.map((item) => {
+                if(item.problem_id === problem_Id_tmp) {
+                    if(sub_tmp === 'nosub') {
+                        sub_tmp = url3.result;
+                    } else if(sub_tmp !== 'AC' && url3.result === 'AC') {
+                        sub_tmp = url3.result;
+                    } else if(sub_tmp !== 'AC') {
+                        if(sub_tmp !== 'WA' && url3.result === 'WA') {
+                            sub_tmp = url3.result;
+                        } else if(sub_tmp !== 'TLE' && url3.result === 'TLE') {
+                            sub_tmp = url3.result;
+                        } else {
+                            sub_tmp = url3.result;
+                        }
+                    }
                 }
             });
 
-        }).then(() => {
+            
+            const problem_Obj = {
+                title:Name_tmp,
+                url:problemUrl,
+                diff:Math.max(diff_tmp, 0),
+                problem_id:problem_Id_tmp,
+                contest:contest_tmp,
+                sub:sub_tmp,
+                user:userName_tmp,
+                version:0
+            };
 
-            if(Name_tmp !== '') {
-                fetchPromDiff().then((url2) => {
-                    diff_tmp = typeof(url2[problem_Id_tmp]) === 'undefined'?0:url2[problem_Id_tmp]['difficulty'];
-                } ).then(() => {
-                    fetchUesrsSub(userName_tmp).then((url3) => {
-                        url3.map((url3) => {
-                          
-                            if(url3.problem_id === problem_Id_tmp) {
-                                if(sub_tmp === 'nosub') {
-                                    sub_tmp = url3.result;
-                                } else if(sub_tmp !== 'AC' && url3.result === 'AC') {
-                                    sub_tmp = url3.result;
-                                } else if(sub_tmp !== 'AC') {
-                                    if(sub_tmp !== 'WA' && url3.result === 'WA') {
-                                        sub_tmp = url3.result;
-                                    } else if(sub_tmp !== 'TLE' && url3.result === 'TLE') {
-                                        sub_tmp = url3.result;
-                                    } else {
-                                        sub_tmp = url3.result;
-                                    }
-                                }
-                            }
-                        });
-
-                    }).then(() => {
-
-                        let userName_tmp = props.userName ===''?'no user':props.userName;
-                        const problem_Obj = {
-                            title:Name_tmp,
-                            url:problemUrl,
-                            diff:Math.max(diff_tmp, 0),
-                            problem_id:problem_Id_tmp,
-                            contest:contest_tmp,
-                            sub:sub_tmp,
-                            user:userName_tmp,
-                            version:0
-                        };
-
-                        tmp.unshift(problem_Obj);
-                        setProblems(tmp);
-                        
-                    });
-                });
-            } else {
-                alert("Problem Not Found");
-            }
-        });
+            tmp.unshift(problem_Obj);
+            setProblems(tmp);
+        } else {
+            alert("Problem Not Found");
+        }
 
         setProblemUrl('');
     }
 
     
     function deleteTask(key) {
-        let tmp = [...problems];
+        const tmp = [...problems];
         tmp.splice(key, 1);
         setProblems(tmp);
     }

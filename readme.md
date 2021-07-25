@@ -10,6 +10,8 @@
 )を打ち込む  
 3.Add ProblemボタンかEnterキーを押す  
 
+難易度や解答状況によるフィルター機能も実装済み
+
 # 使用API
 https://github.com/kenkoooo/AtCoderProblems/blob/master/doc/api.md
 を使用させて頂きました．

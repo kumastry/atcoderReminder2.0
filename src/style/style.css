@@ -1,5 +1,5 @@
 .is-vertical-center {
-    display: flex;
+    display: block;
     align-items: center;
 }
 

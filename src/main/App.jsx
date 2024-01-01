@@ -3,12 +3,12 @@ import Footer from '../components/footer';
 import Main from '../components/main';
 
 
-function Contents(props) {
+function Contents() {
     return(
         <>
-        <Header />
-        <Main/>
-        <Footer />
+          <Header />
+            <Main/>
+          <Footer />
         </>
     );
 }

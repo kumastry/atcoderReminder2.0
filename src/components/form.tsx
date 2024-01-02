@@ -8,7 +8,6 @@ function Form(props) {
   const [subFilter, setSubFilter] = useState("all");
   const [diffFilter, setDiffFilter] = useState("all");
 
-  let userName_tmp = props.userName;
   useEffect(() => {
     if (localStorage.array) {
       const saveDate = JSON.parse(localStorage.array);

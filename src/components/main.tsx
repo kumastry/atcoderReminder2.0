@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import Form from "./form";
 
-function Main(props) {
+function Main() {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
     if (localStorage.user) {
       const userName_localst = JSON.parse(localStorage.user);
-      userform.value = userName_localst;
       setUserName(userName_localst);
     }
   }, []);

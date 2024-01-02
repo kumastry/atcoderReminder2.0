@@ -1,4 +1,4 @@
-function Header() {
+function Header(): React.JSX.Element {
   return (
     <div>
       <header className="hero is-success is-bold">

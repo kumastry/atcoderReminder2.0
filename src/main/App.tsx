@@ -2,7 +2,7 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import Main from "../components/main";
 
-function Contents() {
+function Contents(): React.JSX.Element {
   return (
     <>
       <Header />
@@ -12,7 +12,7 @@ function Contents() {
   );
 }
 
-function App() {
+function App(): React.JSX.Element {
   return <Contents />;
 }
 

@@ -1,6 +1,6 @@
 import { EmailIcon, XIcon } from "react-share";
 
-function Footer() {
+function Footer(): React.JSX.Element {
   return (
     <footer className="footer">
       <div className="content has-text-centered">

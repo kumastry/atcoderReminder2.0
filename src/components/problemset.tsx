@@ -1,58 +1,60 @@
 import Card from "./card";
+import type { ProblemSetPropsType } from "./../types/props";
 
-function ProblemSet(props) {
-  const tmp = props.array.filter((array) => {
+function ProblemSet({
+  array,
+  deleteTask,
+  diffFilter,
+  subFilter,
+}: ProblemSetPropsType): React.JSX.Element {
+  const tmp = array.filter((element) => {
     let col = "all";
-    if (array.diff < 400) {
+    if (element.diff < 400) {
       col = "gray";
-    } else if (array.diff < 800) {
+    } else if (element.diff < 800) {
       col = "brawn";
-    } else if (array.diff < 1200) {
+    } else if (element.diff < 1200) {
       col = "green";
-    } else if (array.diff < 1600) {
+    } else if (element.diff < 1600) {
       col = "cyan";
-    } else if (array.diff < 2000) {
+    } else if (element.diff < 2000) {
       col = "blue";
-    } else if (array.diff < 2400) {
+    } else if (element.diff < 2400) {
       col = "yellow";
-    } else if (array.diff < 2800) {
+    } else if (element.diff < 2800) {
       col = "orange";
     } else {
       col = "red";
     }
 
     console.log(col);
-    if (props.diffFilter === "all") {
+    if (diffFilter === "all") {
       return true;
     }
-    return props.diffFilter === col;
+    return diffFilter === col;
   });
 
-  const resArray = tmp.filter((array) => {
+  const resArray = tmp.filter((element) => {
     let sub = "all";
-    if (array.sub === "AC") {
+    if (element.sub === "AC") {
       sub = "AC";
-    } else if (array.sub === "WA") {
+    } else if (element.sub === "WA") {
       sub = "WA";
-    } else if (array.sub === "nosub") {
+    } else if (element.sub === "nosub") {
       sub = "nosub";
     }
 
-    if (props.subFilter === "all") {
+    if (subFilter === "all") {
       return true;
     }
-    return props.subFilter === sub;
+    return subFilter === sub;
   });
 
   return (
     <div>
       <div className="is-vertical-center">
-        {resArray.map((array, key) => {
-          return array !== "init" ? (
-            <Card array={array} id={key} deleteTask={props.deleteTask} />
-          ) : (
-            <p></p>
-          );
+        {resArray.map((element, key: number) => {
+          return <Card cardDetail={element} id={key} deleteTask={deleteTask} />;
         })}
       </div>
     </div>

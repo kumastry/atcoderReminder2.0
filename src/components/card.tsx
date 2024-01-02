@@ -1,9 +1,14 @@
-function Card(props) {
-  let background = "";
+import type { CardPropsType } from "./../types/props";
 
-  if (props.array.sub === "AC") {
+function Card({
+  cardDetail,
+  deleteTask,
+  id,
+}: CardPropsType): React.JSX.Element {
+  let background = "";
+  if (cardDetail.sub === "AC") {
     background = "#c8e4cc";
-  } else if (props.array.sub !== "nosub") {
+  } else if (cardDetail.sub !== "nosub") {
     background = "#fcecbc";
   } else {
     background = "#ffffff";
@@ -16,23 +21,22 @@ function Card(props) {
     >
       <div className="card-content">
         <p className="title">
-          <a href={props.array.url} target="_black">
-            {props.array.contest + " " + props.array.title}
+          <a href={cardDetail.url} target="_black">
+            {cardDetail.contest + " " + cardDetail.title}
             <br />
-            {"diff:" + props.array.diff + " submission:" + props.array.sub}
+            {"diff:" + cardDetail.diff + " submission:" + cardDetail.sub}
             <br />
           </a>
         </p>
 
-        <p class="subtitle">user:{props.array.user}</p>
+        <p className="subtitle">user:{cardDetail.user}</p>
 
         <footer className="card-footer">
-          {/* <input  type = "button" value = "edit" className="card-footer-item" onClick ={() => props.editTask(key)}/> */}
           <input
             type="button"
             value="delete"
             className="card-footer-item"
-            onClick={() => props.deleteTask(props.id)}
+            onClick={() => deleteTask(id)}
           />
         </footer>
       </div>

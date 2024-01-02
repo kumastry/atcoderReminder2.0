@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { fetchPromDiff, fetchPromInfo, fetchUesrsSub } from "../main/api";
-import ProblemSet from "./problemset";
+import type { FormPropsType } from "./../types/props";
 
-function Form(props) {
+function Form({
+  userName,
+  problems,
+  setProblems,
+  setSubFilter,
+  setDiffFilter,
+}: FormPropsType) {
   const [problemUrl, setProblemUrl] = useState("");
-  const [problems, setProblems] = useState([]);
-  const [subFilter, setSubFilter] = useState("all");
-  const [diffFilter, setDiffFilter] = useState("all");
 
   useEffect(() => {
     if (localStorage.array) {
@@ -20,14 +23,14 @@ function Form(props) {
   }, [problems]);
 
   async function addProblem() {
-    let tmp = [...problems];
+    const tmp = [...problems];
     const urlsplit = problemUrl.split("/");
     const problem_Id_tmp = urlsplit[urlsplit.length - 1];
     const contest_tmp = urlsplit[urlsplit.length - 3];
     let Name_tmp = "";
     let diff_tmp = 0;
     let sub_tmp = "nosub";
-    let userName_tmp = props.userName === "" ? "no user" : props.userName;
+    const userName_tmp = userName === "" ? "no user" : userName;
     const promInfo = await fetchPromInfo();
 
     console.log(promInfo);
@@ -76,18 +79,13 @@ function Form(props) {
       };
       console.log(problem_Obj);
       tmp.unshift(problem_Obj);
+      console.log(tmp);
       setProblems(tmp);
     } else {
       alert("Problem Not Found");
     }
 
     setProblemUrl("");
-  }
-
-  function deleteTask(key) {
-    const tmp = [...problems];
-    tmp.splice(key, 1);
-    setProblems(tmp);
   }
 
   const reLoad = () => {
@@ -98,7 +96,7 @@ function Form(props) {
     });
 
     userNames = [...new Set(userNames)];
-    let tmp = [...problems];
+    const tmp = [...problems];
 
     userNames.map((t1) => {
       fetchUesrsSub(t1).then((data) => {
@@ -165,15 +163,6 @@ function Form(props) {
               <option value="red">2800-∞(red)</option>
             </select>
           </div>
-
-          <section className="section">
-            <ProblemSet
-              array={problems}
-              deleteTask={deleteTask}
-              diffFilter={diffFilter}
-              subFilter={subFilter}
-            />
-          </section>
         </section>
       </main>
     </div>

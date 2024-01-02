@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react";
 import Form from "./form";
+import ProblemSet from "./problemset";
+import type {
+  SubmissionType,
+  DifficultyType,
+  ProblemType,
+} from "./../types/base";
 
-function Main() {
-  const [userName, setUserName] = useState("");
+function Main(): React.JSX.Element {
+  const [userName, setUserName] = useState<string>("");
+  const [problems, setProblems] = useState<ProblemType[]>([]);
+  const [subFilter, setSubFilter] = useState<SubmissionType>("all");
+  const [diffFilter, setDiffFilter] = useState<DifficultyType>("all");
 
   useEffect(() => {
     if (localStorage.user) {
@@ -15,8 +24,15 @@ function Main() {
     localStorage.setItem("user", JSON.stringify(userName));
   }, [userName]);
 
+  function deleteTask(key: number) {
+    const tmp = [...problems];
+    tmp.splice(key, 1);
+    setProblems(tmp);
+  }
+
   return (
     <div>
+      {/* ユーザーネーム入力欄 */}
       <nav className="navbar" role="navigation" aria-label="main nabigation">
         <div className="navbar-brand">
           <input
@@ -29,7 +45,25 @@ function Main() {
           ></input>
         </div>
       </nav>
-      <Form userName={userName} />
+
+      {/*URLフォーム*/}
+      <Form
+        userName={userName}
+        problems={problems}
+        setProblems={setProblems}
+        setSubFilter={setSubFilter}
+        setDiffFilter={setDiffFilter}
+      />
+
+      {/* 問題リスト */}
+      <section className="section">
+        <ProblemSet
+          array={problems}
+          deleteTask={deleteTask}
+          diffFilter={diffFilter}
+          subFilter={subFilter}
+        />
+      </section>
     </div>
   );
 }

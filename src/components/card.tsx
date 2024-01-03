@@ -5,7 +5,6 @@ function Card({
   deleteProblem,
   id,
 }: CardPropsType): React.JSX.Element {
-
   // 問題の提出状況によってカード背景色を変更する
   let cardBackgroundColor = "";
   if (cardDetail.sub === "AC") {

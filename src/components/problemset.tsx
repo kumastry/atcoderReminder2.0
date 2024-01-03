@@ -53,7 +53,9 @@ function ProblemSet({
     <div>
       <div className="is-vertical-center">
         {filteredProblems.map((element, key: number) => {
-          return <Card cardDetail={element} id={key} deleteProblem={deleteProblem} />;
+          return (
+            <Card cardDetail={element} id={key} deleteProblem={deleteProblem} />
+          );
         })}
       </div>
     </div>

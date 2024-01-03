@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { fetchPromDiff, fetchPromInfo, fetchUesrsSub } from "../main/api";
 import type { FormPropsType } from "./../types/props";
+// import type { FetchProblemType } from "./../types/apis";
+import type { ProblemType, SubmissionType } from "./../types/base";
 
 function Form({
   userName,
@@ -11,13 +13,15 @@ function Form({
 }: FormPropsType) {
   const [problemUrl, setProblemUrl] = useState("");
 
+  // ローカルストレージから問題データを取り出す
   useEffect(() => {
     if (localStorage.array) {
       const saveDate = JSON.parse(localStorage.array);
       setProblems(saveDate);
     }
-  }, []);
+  }, [setProblems]);
 
+  // 問題が追加されたらローカルストレージに問題データを追加する
   useEffect(() => {
     localStorage.setItem("array", JSON.stringify(problems));
   }, [problems]);
@@ -27,10 +31,12 @@ function Form({
     const urlsplit = problemUrl.split("/");
     const problem_Id_tmp = urlsplit[urlsplit.length - 1];
     const contest_tmp = urlsplit[urlsplit.length - 3];
+
     let Name_tmp = "";
     let diff_tmp = 0;
-    let sub_tmp = "nosub";
+    let sub_tmp: SubmissionType = "nosub";
     const userName_tmp = userName === "" ? "no user" : userName;
+
     const promInfo = await fetchPromInfo();
 
     console.log(promInfo);
@@ -67,7 +73,7 @@ function Form({
         }
       });
 
-      const problem_Obj = {
+      const problem_Obj: ProblemType = {
         title: Name_tmp,
         url: problemUrl,
         diff: Math.max(diff_tmp, 0),
@@ -115,6 +121,7 @@ function Form({
     console.log(problems);
   };
 
+  console.log("form");
   return (
     <div>
       <main>

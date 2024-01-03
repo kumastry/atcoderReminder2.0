@@ -1,4 +1,4 @@
-export type SubmissionType = "all" | "AC" | "WA" | "nosub";
+export type SubmissionType = "all" | "AC" | "WA" | "TLE" | "MLE" | "nosub";
 
 export type DifficultyType =
   | "all"
@@ -15,7 +15,7 @@ export type ProblemType = {
   title: string;
   url: string;
   diff: number;
-  problem_id: number;
+  problem_id: string;
   contest: string;
   sub: Exclude<SubmissionType, "all">;
   user: string;

@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { fetchPromDiff, fetchPromInfo, fetchUesrsSub } from "../main/api";
 import type { FormPropsType } from "./../types/props";
 // import type { FetchProblemType } from "./../types/apis";
-import type { ProblemType, SubmissionType } from "./../types/base";
+import type {
+  ProblemType,
+  SubmissionType,
+  DifficultyType,
+} from "./../types/base";
 
 function Form({
   userName,
@@ -151,7 +155,13 @@ function Form({
           </button>
 
           <div className="select is-success is-active ">
-            <select onChange={(e) => setSubFilter(e.target.value)}>
+            <select
+              onChange={(e) =>
+                setSubFilter(
+                  e.target.value as Exclude<SubmissionType, "TLE" | "MLE">,
+                )
+              }
+            >
               <option value="all">submission-All</option>
               <option value="AC">AC</option>
               <option value="WA">WA</option>
@@ -160,7 +170,9 @@ function Form({
           </div>
 
           <div className="select is-success is-active">
-            <select onChange={(e) => setDiffFilter(e.target.value)}>
+            <select
+              onChange={(e) => setDiffFilter(e.target.value as DifficultyType)}
+            >
               <option value="all">diffculity-All</option>
               <option value="gray">0-400(gray)</option>
               <option value="brawn">400-800(brawn)</option>

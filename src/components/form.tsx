@@ -94,31 +94,33 @@ function Form({
     setProblemUrl("");
   }
 
+  // 実装中
   const reLoad = () => {
-    console.log(problems);
-    let userNames = [];
-    problems.map((t) => {
-      userNames.push(t.user);
-    });
+    // console.log(problems);
+    // let userNames = [];
+    // problems.map((t) => {
+    //   userNames.push(t.user);
+    // });
 
-    userNames = [...new Set(userNames)];
-    const tmp = [...problems];
+    // userNames = [...new Set(userNames)];
+    // const tmp = [...problems];
 
-    userNames.map((t1) => {
-      fetchUesrsSub(t1).then((data) => {
-        tmp.map((t2) => {
-          data.map((t3) => {
-            if (t2.problem_id === t3.problem_id) {
-              t2.sub = t3.result;
-              t2.version++;
-            }
-          });
-        });
-      });
-    });
+    // userNames.map((t1) => {
+    //   fetchUesrsSub(t1).then((data) => {
+    //     tmp.map((t2) => {
+    //       data.map((t3) => {
+    //         if (t2.problem_id === t3.problem_id) {
+    //           t2.sub = t3.result;
+    //           t2.version++;
+    //         }
+    //       });
+    //     });
+    //   });
+    // });
 
-    setProblems(tmp);
-    console.log(problems);
+    // setProblems(tmp);
+    // console.log(problems);
+    alert("実装中の機能です");
   };
 
   console.log("form");

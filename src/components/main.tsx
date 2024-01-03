@@ -13,6 +13,7 @@ function Main(): React.JSX.Element {
   const [subFilter, setSubFilter] = useState<SubmissionType>("all");
   const [diffFilter, setDiffFilter] = useState<DifficultyType>("all");
 
+  // ローカルストレージからユーザー名を取得する
   useEffect(() => {
     if (localStorage.user) {
       const userName_localst = JSON.parse(localStorage.user);
@@ -20,16 +21,18 @@ function Main(): React.JSX.Element {
     }
   }, []);
 
+  // ユーザー名が入力されたらローカルストレージに保存する
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(userName));
   }, [userName]);
 
-  function deleteTask(key: number) {
-    const tmp = [...problems];
-    tmp.splice(key, 1);
-    setProblems(tmp);
+  function deleteProblem(key: number) {
+    const problemsCopy = [...problems];
+    problemsCopy.splice(key, 1);
+    setProblems(problemsCopy);
   }
 
+  console.log("main");
   return (
     <div>
       {/* ユーザーネーム入力欄 */}
@@ -58,8 +61,8 @@ function Main(): React.JSX.Element {
       {/* 問題リスト */}
       <section className="section">
         <ProblemSet
-          array={problems}
-          deleteTask={deleteTask}
+          problems={problems}
+          deleteProblem={deleteProblem}
           diffFilter={diffFilter}
           subFilter={subFilter}
         />

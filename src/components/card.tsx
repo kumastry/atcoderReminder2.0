@@ -2,22 +2,24 @@ import type { CardPropsType } from "./../types/props";
 
 function Card({
   cardDetail,
-  deleteTask,
+  deleteProblem,
   id,
 }: CardPropsType): React.JSX.Element {
-  let background = "";
+
+  // 問題の提出状況によってカード背景色を変更する
+  let cardBackgroundColor = "";
   if (cardDetail.sub === "AC") {
-    background = "#c8e4cc";
+    cardBackgroundColor = "#c8e4cc";
   } else if (cardDetail.sub !== "nosub") {
-    background = "#fcecbc";
+    cardBackgroundColor = "#fcecbc";
   } else {
-    background = "#ffffff";
+    cardBackgroundColor = "#ffffff";
   }
 
   return (
     <div
       className="card"
-      style={{ margin: "8px", backgroundColor: background }}
+      style={{ margin: "8px", backgroundColor: cardBackgroundColor }}
     >
       <div className="card-content">
         <p className="title">
@@ -36,7 +38,7 @@ function Card({
             type="button"
             value="delete"
             className="card-footer-item"
-            onClick={() => deleteTask(id)}
+            onClick={() => deleteProblem(id)}
           />
         </footer>
       </div>

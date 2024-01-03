@@ -4,7 +4,7 @@ type CardDetailType = Omit<ProblemType, "version" | "problem_id">;
 
 export type CardPropsType = {
   cardDetail: CardDetailType;
-  deleteTask: (key: number) => void;
+  deleteProblem: (key: number) => void;
   id: number;
 };
 
@@ -17,8 +17,8 @@ export type FormPropsType = {
 };
 
 export type ProblemSetPropsType = {
-  array: ProblemType[];
-  deleteTask: (key: number) => void;
+  problems: ProblemType[];
+  deleteProblem: (key: number) => void;
   subFilter: SubmissionType;
   diffFilter: DifficultyType;
 };

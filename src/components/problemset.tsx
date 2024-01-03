@@ -2,39 +2,38 @@ import Card from "./card";
 import type { ProblemSetPropsType } from "./../types/props";
 
 function ProblemSet({
-  array,
-  deleteTask,
+  problems,
+  deleteProblem,
   diffFilter,
   subFilter,
 }: ProblemSetPropsType): React.JSX.Element {
-  const tmp = array.filter((element) => {
-    let col = "all";
+  const filteredBycolororProblems = problems.filter((element) => {
+    let color = "all";
     if (element.diff < 400) {
-      col = "gray";
+      color = "gray";
     } else if (element.diff < 800) {
-      col = "brawn";
+      color = "brawn";
     } else if (element.diff < 1200) {
-      col = "green";
+      color = "green";
     } else if (element.diff < 1600) {
-      col = "cyan";
+      color = "cyan";
     } else if (element.diff < 2000) {
-      col = "blue";
+      color = "blue";
     } else if (element.diff < 2400) {
-      col = "yellow";
+      color = "yellow";
     } else if (element.diff < 2800) {
-      col = "orange";
+      color = "orange";
     } else {
-      col = "red";
+      color = "red";
     }
 
-    console.log(col);
     if (diffFilter === "all") {
       return true;
     }
-    return diffFilter === col;
+    return diffFilter === color;
   });
 
-  const resArray = tmp.filter((element) => {
+  const filteredProblems = filteredBycolororProblems.filter((element) => {
     let sub = "all";
     if (element.sub === "AC") {
       sub = "AC";
@@ -49,12 +48,12 @@ function ProblemSet({
     }
     return subFilter === sub;
   });
-
+  console.log("problem");
   return (
     <div>
       <div className="is-vertical-center">
-        {resArray.map((element, key: number) => {
-          return <Card cardDetail={element} id={key} deleteTask={deleteTask} />;
+        {filteredProblems.map((element, key: number) => {
+          return <Card cardDetail={element} id={key} deleteProblem={deleteProblem} />;
         })}
       </div>
     </div>

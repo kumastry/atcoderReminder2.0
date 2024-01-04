@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Form from "./form";
 import ProblemSet from "./problemset";
+import useUserName from "./../hooks/useUserName";
 import type {
   SubmissionType,
   DifficultyType,
@@ -8,23 +9,11 @@ import type {
 } from "./../types/base";
 
 function Main(): React.JSX.Element {
-  const [userName, setUserName] = useState<string>("");
   const [problems, setProblems] = useState<ProblemType[]>([]);
   const [subFilter, setSubFilter] = useState<SubmissionType>("all");
   const [diffFilter, setDiffFilter] = useState<DifficultyType>("all");
 
-  // ローカルストレージからユーザー名を取得する
-  useEffect(() => {
-    if (localStorage.user) {
-      const userName_localst = JSON.parse(localStorage.user);
-      setUserName(userName_localst);
-    }
-  }, []);
-
-  // ユーザー名が入力されたらローカルストレージに保存する
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(userName));
-  }, [userName]);
+  const { userName, setUserName } = useUserName();
 
   console.log("main");
   return (

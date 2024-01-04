@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchPromDiff, fetchPromInfo, fetchUesrsSub } from "../main/api";
+import { fetchProblemDiff, fetchProblemData, fetchUserSubmission } from "../main/api";
 import type { FormPropsType } from "./../types/props";
 // import type { FetchProblemType } from "./../types/apis";
 import type {
@@ -36,48 +36,29 @@ function Form({
     const problem_Id_tmp = urlsplit[urlsplit.length - 1];
     const contest_tmp = urlsplit[urlsplit.length - 3];
 
-    let Name_tmp = "";
+
     let diff_tmp = 0;
-    let sub_tmp: SubmissionType = "nosub";
+    let sub_tmp: Exclude<SubmissionType, "all"> = "nosub";
     const userName_tmp = userName === "" ? "no user" : userName;
+    let Name_tmp;
 
-    const promInfo = await fetchPromInfo();
+    try {
+      const promInfo = await fetchProblemData(problem_Id_tmp);
+      Name_tmp = promInfo?.title;
+      console.log(promInfo);
+    } catch (e) {
+      alert("エラーが発生しました");
+    }
 
-    console.log(promInfo);
-    promInfo.map((item) => {
-      if (item.id == problem_Id_tmp) {
-        Name_tmp = item.title;
+    if (Name_tmp) {
+      diff_tmp =  await fetchProblemDiff(problem_Id_tmp);
+      const usersSub = await fetchUserSubmission(userName_tmp, problem_Id_tmp);
+
+      if(usersSub) {
+        sub_tmp = usersSub.result;
       }
-    });
 
-    if (Name_tmp !== "") {
-      const promDiff = await fetchPromDiff();
-      diff_tmp =
-        typeof promDiff[problem_Id_tmp] === "undefined"
-          ? 0
-          : promDiff[problem_Id_tmp]["difficulty"];
-
-      const usersSub = await fetchUesrsSub(userName_tmp);
-
-      usersSub.map((item) => {
-        if (item.problem_id === problem_Id_tmp) {
-          if (sub_tmp === "nosub") {
-            sub_tmp = item.result;
-          } else if (sub_tmp !== "AC" && item.result === "AC") {
-            sub_tmp = item.result;
-          } else if (sub_tmp !== "AC") {
-            if (sub_tmp !== "WA" && item.result === "WA") {
-              sub_tmp = item.result;
-            } else if (sub_tmp !== "TLE" && item.result === "TLE") {
-              sub_tmp = item.result;
-            } else {
-              sub_tmp = item.result;
-            }
-          }
-        }
-      });
-
-      const problem_Obj: ProblemType = {
+      const problemObj: ProblemType = {
         title: Name_tmp,
         url: problemUrl,
         diff: Math.max(diff_tmp, 0),
@@ -87,8 +68,9 @@ function Form({
         user: userName_tmp,
         version: 0,
       };
-      console.log(problem_Obj);
-      tmp.unshift(problem_Obj);
+
+      console.log(problemObj);
+      tmp.unshift(problemObj);
       console.log(tmp);
       setProblems(tmp);
     } else {
@@ -110,7 +92,7 @@ function Form({
     // const tmp = [...problems];
 
     // userNames.map((t1) => {
-    //   fetchUesrsSub(t1).then((data) => {
+    //   fetchUserSubmission(t1).then((data) => {
     //     tmp.map((t2) => {
     //       data.map((t3) => {
     //         if (t2.problem_id === t3.problem_id) {

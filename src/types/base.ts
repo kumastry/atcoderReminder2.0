@@ -1,4 +1,4 @@
-export type SubmissionType = "all" | "AC" | "WA" | "TLE" | "MLE" | "nosub";
+export type SubmissionType = "all" | "AC" | "WA" | "TLE" | "MLE" | "CE" | "nosub";
 
 export type DifficultyType =
   | "all"

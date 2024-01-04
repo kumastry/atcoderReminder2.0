@@ -30,6 +30,6 @@ export type FetchUserSubmissionType = {
   language: string;
   point: number;
   length: number;
-  result: SubmissionType;
+  result: Exclude<SubmissionType, "all">;
   execution_time: number;
 };

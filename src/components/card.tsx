@@ -1,4 +1,5 @@
 import type { CardPropsType } from "./../types/props";
+import getCardBackgroundColor from "./../logic/getCardBackgroundColor";
 
 function Card({
   cardDetail,
@@ -6,19 +7,13 @@ function Card({
   id,
 }: CardPropsType): React.JSX.Element {
   // 問題の提出状況によってカード背景色を変更する
-  let cardBackgroundColor = "";
-  if (cardDetail.sub === "AC") {
-    cardBackgroundColor = "#c8e4cc";
-  } else if (cardDetail.sub !== "nosub") {
-    cardBackgroundColor = "#fcecbc";
-  } else {
-    cardBackgroundColor = "#ffffff";
-  }
-
   return (
     <div
       className="card"
-      style={{ margin: "8px", backgroundColor: cardBackgroundColor }}
+      style={{
+        margin: "8px",
+        backgroundColor: getCardBackgroundColor(cardDetail.sub),
+      }}
       key={id}
     >
       <div className="card-content">

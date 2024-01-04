@@ -26,12 +26,6 @@ function Main(): React.JSX.Element {
     localStorage.setItem("user", JSON.stringify(userName));
   }, [userName]);
 
-  function deleteProblem(key: number) {
-    const problemsCopy = [...problems];
-    problemsCopy.splice(key, 1);
-    setProblems(problemsCopy);
-  }
-
   console.log("main");
   return (
     <div>
@@ -62,7 +56,7 @@ function Main(): React.JSX.Element {
       <section className="section">
         <ProblemSet
           problems={problems}
-          deleteProblem={deleteProblem}
+          setProblems={setProblems}
           diffFilter={diffFilter}
           subFilter={subFilter}
         />

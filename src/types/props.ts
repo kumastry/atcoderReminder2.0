@@ -18,7 +18,7 @@ export type FormPropsType = {
 
 export type ProblemSetPropsType = {
   problems: ProblemType[];
-  deleteProblem: (key: number) => void;
+  setProblems: React.Dispatch<React.SetStateAction<ProblemType[]>>;
   subFilter: SubmissionType;
   diffFilter: DifficultyType;
 };

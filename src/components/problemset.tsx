@@ -3,10 +3,16 @@ import type { ProblemSetPropsType } from "./../types/props";
 
 function ProblemSet({
   problems,
-  deleteProblem,
+  setProblems,
   diffFilter,
   subFilter,
 }: ProblemSetPropsType): React.JSX.Element {
+  function deleteProblem(key: number) {
+    const problemsCopy = [...problems];
+    problemsCopy.splice(key, 1);
+    setProblems(problemsCopy);
+  }
+
   const filteredBycolororProblems = problems.filter((element) => {
     let color = "all";
     if (element.diff < 400) {

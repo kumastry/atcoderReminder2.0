@@ -19,6 +19,7 @@ function Card({
     <div
       className="card"
       style={{ margin: "8px", backgroundColor: cardBackgroundColor }}
+      key={id}
     >
       <div className="card-content">
         <p className="title">

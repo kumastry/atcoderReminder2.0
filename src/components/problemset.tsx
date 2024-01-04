@@ -50,15 +50,15 @@ function ProblemSet({
   });
   console.log("problem");
   return (
-    <div>
-      <div className="is-vertical-center">
-        {filteredProblems.map((element, key: number) => {
-          return (
+    <ul className="is-vertical-center">
+      {filteredProblems.map((element, key: number) => {
+        return (
+          <li key={key}>
             <Card cardDetail={element} id={key} deleteProblem={deleteProblem} />
-          );
-        })}
-      </div>
-    </div>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 

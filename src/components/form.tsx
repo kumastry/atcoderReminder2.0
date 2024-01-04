@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
-import { fetchProblemDiff, fetchProblemData, fetchUserSubmission } from "../main/api";
+import {
+  fetchProblemDiff,
+  fetchProblemData,
+  fetchUserSubmission,
+} from "../main/api";
 import type { FormPropsType } from "./../types/props";
 // import type { FetchProblemType } from "./../types/apis";
+
 import type {
   ProblemType,
   SubmissionType,
@@ -31,53 +36,46 @@ function Form({
   }, [problems]);
 
   async function addProblem() {
-    const tmp = [...problems];
-    const urlsplit = problemUrl.split("/");
-    const problem_Id_tmp = urlsplit[urlsplit.length - 1];
-    const contest_tmp = urlsplit[urlsplit.length - 3];
-
-
-    let diff_tmp = 0;
-    let sub_tmp: Exclude<SubmissionType, "all"> = "nosub";
-    const userName_tmp = userName === "" ? "no user" : userName;
-    let Name_tmp;
+    const splitUrl = problemUrl.split("/");
+    const problemId = splitUrl[splitUrl.length - 1];
+    const contest = splitUrl[splitUrl.length - 3];
+    let submission: Exclude<SubmissionType, "all"> = "nosub";
+    const userNameCopy = userName === "" ? "no user" : userName;
 
     try {
-      const promInfo = await fetchProblemData(problem_Id_tmp);
-      Name_tmp = promInfo?.title;
-      console.log(promInfo);
-    } catch (e) {
-      alert("エラーが発生しました");
-    }
+      const [problemData, problemDiff, userSubmission] = await Promise.all([
+        fetchProblemData(problemId),
+        fetchProblemDiff(problemId),
+        fetchUserSubmission(userNameCopy, problemId),
+      ]);
 
-    if (Name_tmp) {
-      diff_tmp =  await fetchProblemDiff(problem_Id_tmp);
-      const usersSub = await fetchUserSubmission(userName_tmp, problem_Id_tmp);
+      const title = problemData?.title;
+      if (typeof title === "undefined") {
+        throw new Error("problem not found");
+      }
 
-      if(usersSub) {
-        sub_tmp = usersSub.result;
+      if (typeof userSubmission !== "undefined") {
+        submission = userSubmission.result;
       }
 
       const problemObj: ProblemType = {
-        title: Name_tmp,
+        title: title,
         url: problemUrl,
-        diff: Math.max(diff_tmp, 0),
-        problem_id: problem_Id_tmp,
-        contest: contest_tmp,
-        sub: sub_tmp,
-        user: userName_tmp,
+        diff: Math.max(problemDiff, 0),
+        problem_id: problemId,
+        contest: contest,
+        sub: submission,
+        user: userNameCopy,
         version: 0,
       };
-
-      console.log(problemObj);
-      tmp.unshift(problemObj);
-      console.log(tmp);
-      setProblems(tmp);
-    } else {
-      alert("Problem Not Found");
+      setProblems([problemObj, ...problems]);
+      setProblemUrl("");
+    } catch (e) {
+      if (e instanceof Error) {
+        console.log(e.message);
+        alert(e.message);
+      }
     }
-
-    setProblemUrl("");
   }
 
   // 実装中

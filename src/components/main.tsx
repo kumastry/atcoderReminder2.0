@@ -2,18 +2,15 @@ import { useState } from "react";
 import Form from "./form";
 import ProblemSet from "./problemset";
 import useUserName from "./../hooks/useUserName";
-import type {
-  SubmissionType,
-  DifficultyType,
-  ProblemType,
-} from "./../types/base";
+import useProblems from "./../hooks/useProblems";
+import type { SubmissionType, DifficultyType } from "./../types/base";
 
 function Main(): React.JSX.Element {
-  const [problems, setProblems] = useState<ProblemType[]>([]);
   const [subFilter, setSubFilter] = useState<SubmissionType>("all");
   const [diffFilter, setDiffFilter] = useState<DifficultyType>("all");
 
   const { userName, setUserName } = useUserName();
+  const { problems, addProblem, deleteProblem } = useProblems();
 
   console.log("main");
   return (
@@ -35,8 +32,7 @@ function Main(): React.JSX.Element {
       {/*URLフォーム*/}
       <Form
         userName={userName}
-        problems={problems}
-        setProblems={setProblems}
+        addProblem={addProblem}
         setSubFilter={setSubFilter}
         setDiffFilter={setDiffFilter}
       />
@@ -45,7 +41,7 @@ function Main(): React.JSX.Element {
       <section className="section">
         <ProblemSet
           problems={problems}
-          setProblems={setProblems}
+          deleteProblem={deleteProblem}
           diffFilter={diffFilter}
           subFilter={subFilter}
         />

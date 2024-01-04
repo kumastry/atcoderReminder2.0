@@ -1,82 +1,16 @@
-import { useEffect, useState } from "react";
-import {
-  fetchProblemDiff,
-  fetchProblemData,
-  fetchUserSubmission,
-} from "../main/api";
+import { useState } from "react";
 import type { FormPropsType } from "./../types/props";
 // import type { FetchProblemType } from "./../types/apis";
 
-import type {
-  ProblemType,
-  SubmissionType,
-  DifficultyType,
-} from "./../types/base";
+import type { SubmissionType, DifficultyType } from "./../types/base";
 
 function Form({
   userName,
-  problems,
-  setProblems,
+  addProblem,
   setSubFilter,
   setDiffFilter,
 }: FormPropsType) {
   const [problemUrl, setProblemUrl] = useState("");
-
-  // ローカルストレージから問題データを取り出す
-  useEffect(() => {
-    if (localStorage.array) {
-      const saveDate = JSON.parse(localStorage.array);
-      setProblems(saveDate);
-    }
-  }, [setProblems]);
-
-  // 問題が追加されたらローカルストレージに問題データを追加する
-  useEffect(() => {
-    localStorage.setItem("array", JSON.stringify(problems));
-  }, [problems]);
-
-  async function addProblem() {
-    const splitUrl = problemUrl.split("/");
-    const problemId = splitUrl[splitUrl.length - 1];
-    const contest = splitUrl[splitUrl.length - 3];
-    let submission: Exclude<SubmissionType, "all"> = "nosub";
-    const userNameCopy = userName === "" ? "no user" : userName;
-
-    try {
-      const [problemData, problemDiff, userSubmission] = await Promise.all([
-        fetchProblemData(problemId),
-        fetchProblemDiff(problemId),
-        fetchUserSubmission(userNameCopy, problemId),
-      ]);
-
-      const title = problemData?.title;
-      if (typeof title === "undefined") {
-        throw new Error("problem not found");
-      }
-
-      if (typeof userSubmission !== "undefined") {
-        submission = userSubmission.result;
-      }
-
-      const problemObj: ProblemType = {
-        title: title,
-        url: problemUrl,
-        diff: Math.max(problemDiff, 0),
-        problem_id: problemId,
-        contest: contest,
-        sub: submission,
-        user: userNameCopy,
-        version: 0,
-      };
-      setProblems([problemObj, ...problems]);
-      setProblemUrl("");
-    } catch (e) {
-      if (e instanceof Error) {
-        console.log(e.message);
-        alert(e.message);
-      }
-    }
-  }
 
   // 実装中
   const reLoad = () => {
@@ -123,13 +57,21 @@ function Form({
             value={problemUrl}
             onChange={(e) => setProblemUrl(e.target.value)}
             onKeyPress={(e) => {
-              e.key == "Enter" ? addProblem() : "";
+              e.key == "Enter"
+                ? () => {
+                    addProblem(userName, problemUrl);
+                    setProblemUrl("");
+                  }
+                : "";
             }}
           />
 
           <button
             className="button is-fullwidth is-success is-light"
-            onClick={addProblem}
+            onClick={() => {
+              addProblem(userName, problemUrl);
+              setProblemUrl("");
+            }}
           >
             Add Problem
           </button>

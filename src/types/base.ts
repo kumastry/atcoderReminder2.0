@@ -28,3 +28,7 @@ export type ProblemType = {
   user: string;
   version: number;
 };
+
+export type AddProblemType = (userName: string, problemUrl: string) => void;
+
+export type DeleteProblemType = (key: number) => void;

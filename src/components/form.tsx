@@ -1,6 +1,5 @@
 import { useState } from "react";
 import type { FormPropsType } from "./../types/props";
-// import type { FetchProblemType } from "./../types/apis";
 
 import type { SubmissionType, DifficultyType } from "./../types/base";
 
@@ -14,30 +13,6 @@ function Form({
 
   // 実装中
   const reLoad = () => {
-    // console.log(problems);
-    // let userNames = [];
-    // problems.map((t) => {
-    //   userNames.push(t.user);
-    // });
-
-    // userNames = [...new Set(userNames)];
-    // const tmp = [...problems];
-
-    // userNames.map((t1) => {
-    //   fetchUserSubmission(t1).then((data) => {
-    //     tmp.map((t2) => {
-    //       data.map((t3) => {
-    //         if (t2.problem_id === t3.problem_id) {
-    //           t2.sub = t3.result;
-    //           t2.version++;
-    //         }
-    //       });
-    //     });
-    //   });
-    // });
-
-    // setProblems(tmp);
-    // console.log(problems);
     alert("実装中の機能です");
   };
 

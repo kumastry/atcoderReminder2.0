@@ -2,7 +2,7 @@ import type {
   SubmissionType,
   DifficultyType,
   ProblemType,
-} from "./../types/base";
+} from "../types/base";
 
 export const filterByColor = (
   element: ProblemType,

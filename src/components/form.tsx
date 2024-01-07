@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { FormPropsType } from "./../types/props";
 
-import type { SubmissionType, DifficultyType } from "./../types/base";
+import type { SubmissionDropdownType, DifficultyType } from "./../types/base";
 
 function Form({
   userName,
@@ -54,9 +54,7 @@ function Form({
           <div className="select is-success is-active ">
             <select
               onChange={(e) =>
-                setSubFilter(
-                  e.target.value as Exclude<SubmissionType, "TLE" | "MLE">,
-                )
+                setSubFilter(e.target.value as SubmissionDropdownType)
               }
             >
               <option value="all">submission-All</option>

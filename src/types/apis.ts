@@ -1,4 +1,4 @@
-import type { SubmissionType } from "./base";
+import type { SubmissonWithoutAllType } from "./base";
 
 export type FetchProblemType = {
   id: string;
@@ -30,6 +30,6 @@ export type FetchUserSubmissionType = {
   language: string;
   point: number;
   length: number;
-  result: Exclude<SubmissionType, "all">;
+  result: SubmissonWithoutAllType;
   execution_time: number;
 };

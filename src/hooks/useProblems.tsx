@@ -4,7 +4,7 @@ import {
   fetchProblemData,
   fetchUserSubmission,
 } from "../main/api";
-import type { ProblemType, SubmissionType } from "../types/base";
+import type { ProblemType, SubmissonWithoutAllType } from "../types/base";
 const useProblems = () => {
   const [problems, setProblems] = useState<ProblemType[]>([]);
 
@@ -25,7 +25,7 @@ const useProblems = () => {
     const splitUrl = problemUrl.split("/");
     const problemId = splitUrl[splitUrl.length - 1];
     const contest = splitUrl[splitUrl.length - 3];
-    let submission: Exclude<SubmissionType, "all"> = "nosub";
+    let submission: SubmissonWithoutAllType = "nosub";
     const userNameCopy = userName === "" ? "no user" : userName;
     console.log(splitUrl);
 

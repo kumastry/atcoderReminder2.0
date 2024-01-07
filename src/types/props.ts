@@ -1,9 +1,9 @@
 import type {
   ProblemType,
-  SubmissionType,
   DifficultyType,
   AddProblemType,
   DeleteProblemType,
+  SubmissionDropdownType,
 } from "./base";
 
 type CardDetailType = Omit<ProblemType, "version" | "problem_id">;
@@ -17,13 +17,13 @@ export type CardPropsType = {
 export type FormPropsType = {
   userName: string;
   addProblem: AddProblemType;
-  setSubFilter: React.Dispatch<React.SetStateAction<SubmissionType>>;
+  setSubFilter: React.Dispatch<React.SetStateAction<SubmissionDropdownType>>;
   setDiffFilter: React.Dispatch<React.SetStateAction<DifficultyType>>;
 };
 
 export type ProblemSetPropsType = {
   problems: ProblemType[];
   deleteProblem: DeleteProblemType;
-  subFilter: SubmissionType;
+  subFilter: SubmissionDropdownType;
   diffFilter: DifficultyType;
 };

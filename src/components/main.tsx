@@ -3,10 +3,10 @@ import Form from "./form";
 import ProblemSet from "./problemset";
 import useUserName from "./../hooks/useUserName";
 import useProblems from "./../hooks/useProblems";
-import type { SubmissionType, DifficultyType } from "./../types/base";
+import type { SubmissionDropdownType, DifficultyType } from "./../types/base";
 
 function Main(): React.JSX.Element {
-  const [subFilter, setSubFilter] = useState<SubmissionType>("all");
+  const [subFilter, setSubFilter] = useState<SubmissionDropdownType>("all");
   const [diffFilter, setDiffFilter] = useState<DifficultyType>("all");
 
   const { userName, setUserName } = useUserName();

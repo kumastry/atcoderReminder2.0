@@ -18,13 +18,19 @@ export type DifficultyType =
   | "orange"
   | "red";
 
+export type SubmissionDropdownType = Exclude<
+  SubmissionType,
+  "TLE" | "MLE" | "CE"
+>;
+export type SubmissonWithoutAllType = Exclude<SubmissionType, "all">;
+
 export type ProblemType = {
   title: string;
   url: string;
   diff: number;
   problem_id: string;
   contest: string;
-  sub: Exclude<SubmissionType, "all">;
+  sub: SubmissonWithoutAllType;
   user: string;
   version: number;
 };

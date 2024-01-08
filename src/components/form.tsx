@@ -19,7 +19,7 @@ function Form({
   const addProblemWithForm = () => {
     addProblem(userName, problemUrl);
     setProblemUrl("");
-  }
+  };
 
   console.log("form");
   return (

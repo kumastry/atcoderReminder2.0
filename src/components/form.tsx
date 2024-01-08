@@ -16,6 +16,11 @@ function Form({
     alert("実装中の機能です");
   };
 
+  const addProblemWithForm = () => {
+    addProblem(userName, problemUrl);
+    setProblemUrl("");
+  }
+
   console.log("form");
   return (
     <div>
@@ -31,22 +36,14 @@ function Form({
             placeholder="Problem URL"
             value={problemUrl}
             onChange={(e) => setProblemUrl(e.target.value)}
-            onKeyPress={(e) => {
-              e.key == "Enter"
-                ? () => {
-                    addProblem(userName, problemUrl);
-                    setProblemUrl("");
-                  }
-                : "";
+            onKeyDown={(e) => {
+              e.key === "Enter" && addProblemWithForm();
             }}
           />
 
           <button
             className="button is-fullwidth is-success is-light"
-            onClick={() => {
-              addProblem(userName, problemUrl);
-              setProblemUrl("");
-            }}
+            onClick={addProblemWithForm}
           >
             Add Problem
           </button>

@@ -11,6 +11,10 @@ export async function fetchProblemData(
     `https://kenkoooo.com/atcoder/resources/problems.json`,
   );
 
+  if (!res.ok) {
+    throw new Error("Network response was not OK");
+  }
+
   const problems: FetchProblemType[] = await res.json();
 
   const filteredProblems = problems.filter((item: FetchProblemType) => {
@@ -30,6 +34,10 @@ export async function fetchProblemDiff(problem_Id: string): Promise<number> {
     `https://kenkoooo.com/atcoder/resources/problem-models.json`,
   );
 
+  if (!res.ok) {
+    throw new Error("Network response was not OK");
+  }
+
   const problemsDiff: DifficultyType = await res.json();
 
   if (problemsDiff[problem_Id]) {
@@ -46,6 +54,11 @@ export async function fetchUserSubmission(
   const res = await fetch(
     `https://kenkoooo.com/atcoder/atcoder-api/results?user=${userName}`,
   );
+
+  if (!res.ok) {
+    throw new Error("Network response was not OK");
+  }
+
   const userSubmissions: FetchUserSubmissionType[] = await res.json();
 
   const filteredUserSubmissions = userSubmissions.filter((item) => {

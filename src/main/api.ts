@@ -51,10 +51,18 @@ export async function fetchUserSubmission(
   userName: string,
   problem_Id: string,
 ): Promise<FetchUserSubmissionType | undefined> {
-  const fromSecond = 1577887218; // 暫定数値 2020年から
-  const userSubmissions: FetchUserSubmissionType[] = await fetchPartialUserSubmissions(userName, fromSecond);
+  const allSubmissions = [] as FetchUserSubmissionType[];
 
-  const filteredUserSubmissions = userSubmissions.filter((item) => {
+  let fromSecond = 1582988400; //2020/3/1 0時のunix時間 俺がatcoder始めた日にち
+  for (;;) {
+    const userSubmissions: FetchUserSubmissionType[] =
+      await fetchPartialUserSubmissions(userName, fromSecond);
+    if (!userSubmissions.length) break;
+    allSubmissions.push(...userSubmissions);
+    allSubmissions.sort((a, b) => a.epoch_second - b.epoch_second);
+    fromSecond = allSubmissions[allSubmissions.length - 1].epoch_second + 1;
+  }
+  const filteredUserSubmissions = allSubmissions.filter((item) => {
     return item.user_id === userName && item.problem_id === problem_Id;
   });
 
@@ -70,7 +78,10 @@ export async function fetchUserSubmission(
   }
 }
 
-const fetchPartialUserSubmissions = async ( userName: string, fromSecond: number) : Promise<FetchUserSubmissionType[]> => {
+const fetchPartialUserSubmissions = async (
+  userName: string,
+  fromSecond: number,
+): Promise<FetchUserSubmissionType[]> => {
   // https://github.com/kenkoooo/AtCoderProblems/blob/37e64781e37e7b0332cc8fe54e99d38ff0229d3e/atcoder-problems-frontend/src/utils/Api.tsx#L9
   // 上のURLを参照
   const res = await fetch(
@@ -81,6 +92,6 @@ const fetchPartialUserSubmissions = async ( userName: string, fromSecond: number
     throw new Error("Network response was not OK");
   }
 
-  const submissionData: FetchUserSubmissionType[]= await res.json();
+  const submissionData: FetchUserSubmissionType[] = await res.json();
   return submissionData;
-}
+};

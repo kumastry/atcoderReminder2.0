@@ -51,16 +51,8 @@ export async function fetchUserSubmission(
   userName: string,
   problem_Id: string,
 ): Promise<FetchUserSubmissionType | undefined> {
-  const fromSecond = 1577887218; // 暫定数値
-  const res = await fetch(
-    `https://kenkoooo.com/atcoder/atcoder-api/v3/user/submissions?user=${userName}&from_second=${fromSecond}`,
-  );
-
-  if (!res.ok) {
-    throw new Error("Network response was not OK");
-  }
-
-  const userSubmissions: FetchUserSubmissionType[] = await res.json();
+  const fromSecond = 1577887218; // 暫定数値 2020年から
+  const userSubmissions: FetchUserSubmissionType[] = await fetchPartialUserSubmissions(userName, fromSecond);
 
   const filteredUserSubmissions = userSubmissions.filter((item) => {
     return item.user_id === userName && item.problem_id === problem_Id;
@@ -76,4 +68,19 @@ export async function fetchUserSubmission(
       if (result === item.result) return item;
     }
   }
+}
+
+const fetchPartialUserSubmissions = async ( userName: string, fromSecond: number) : Promise<FetchUserSubmissionType[]> => {
+  // https://github.com/kenkoooo/AtCoderProblems/blob/37e64781e37e7b0332cc8fe54e99d38ff0229d3e/atcoder-problems-frontend/src/utils/Api.tsx#L9
+  // 上のURLを参照
+  const res = await fetch(
+    `https://kenkoooo.com/atcoder/atcoder-api/v3/user/submissions?user=${userName}&from_second=${fromSecond}`,
+  );
+
+  if (!res.ok) {
+    throw new Error("Network response was not OK");
+  }
+
+  const submissionData: FetchUserSubmissionType[]= await res.json();
+  return submissionData;
 }

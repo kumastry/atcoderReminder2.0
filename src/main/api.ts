@@ -51,8 +51,9 @@ export async function fetchUserSubmission(
   userName: string,
   problem_Id: string,
 ): Promise<FetchUserSubmissionType | undefined> {
+  const fromSecond = 1577887218; // 暫定数値
   const res = await fetch(
-    `https://kenkoooo.com/atcoder/atcoder-api/results?user=${userName}`,
+    `https://kenkoooo.com/atcoder/atcoder-api/v3/user/submissions?user=${userName}&from_second=${fromSecond}`,
   );
 
   if (!res.ok) {

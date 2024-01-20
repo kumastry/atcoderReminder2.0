@@ -28,11 +28,11 @@ const useProblems = () => {
     async (userName: string, url: string) => {
       // URLじゃなかったら例外を投げる
       try {
-        const problemUrl = new URL(url);
+        const problemUrl = new URL(url.trim());
         const { contest, problemId } = getContestInfo(problemUrl);
 
         let submission: SubmissonWithoutAllType = "nosub";
-        const userNameCopy = userName === "" ? "no user" : userName;
+        const userNameCopy = userName === "" ? "no user" : userName.trim();
         const [problemData, problemDiff, userSubmission] = await Promise.all([
           fetchProblemData(problemId),
           fetchProblemDiff(problemId),

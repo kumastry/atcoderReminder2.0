@@ -19,6 +19,7 @@ export type FormPropsType = {
   addProblem: AddProblemType;
   setSubFilter: React.Dispatch<React.SetStateAction<SubmissionDropdownType>>;
   setDiffFilter: React.Dispatch<React.SetStateAction<DifficultyType>>;
+  reLoad: () => void;
 };
 
 export type ProblemSetPropsType = {

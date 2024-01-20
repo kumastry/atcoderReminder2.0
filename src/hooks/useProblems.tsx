@@ -65,7 +65,6 @@ const useProblems = () => {
           contest: contest,
           sub: submission,
           user: userNameCopy,
-          version: 0,
         };
         setProblems([problemObj, ...problems]);
       } catch (e) {

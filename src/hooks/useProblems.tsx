@@ -24,15 +24,24 @@ const useProblems = () => {
   }, [problems]);
 
   const addProblem = useCallback(
-    async (userName: string, problemUrl: string) => {
-      const splitUrl = problemUrl.split("/");
-      const problemId = splitUrl[splitUrl.length - 1];
-      const contest = splitUrl[splitUrl.length - 3];
-      let submission: SubmissonWithoutAllType = "nosub";
-      const userNameCopy = userName === "" ? "no user" : userName;
-      console.log(splitUrl);
-
+    async (userName: string, url: string) => {
+      // URLじゃなかったら例外を投げる
       try {
+        const problemUrl = new URL(url);
+        if (problemUrl.hostname !== "atcoder.jp") {
+          throw new Error("Invalid URL");
+        }
+
+        const splitUrl = problemUrl.pathname.split("/");
+        const problemId = splitUrl.at(-1);
+        const contest = splitUrl.at(-3);
+        if(!problemId || !contest) {
+          throw new Error("Invalid URL");
+        }
+
+        let submission: SubmissonWithoutAllType = "nosub";
+        const userNameCopy = userName === "" ? "no user" : userName;
+
         const [problemData, problemDiff, userSubmission] = await Promise.all([
           fetchProblemData(problemId),
           fetchProblemDiff(problemId),
@@ -50,7 +59,7 @@ const useProblems = () => {
 
         const problemObj: ProblemType = {
           title: title,
-          url: problemUrl,
+          url: problemUrl.href,
           diff: Math.max(problemDiff, 0),
           problem_id: problemId,
           contest: contest,

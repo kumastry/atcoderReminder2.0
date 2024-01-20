@@ -6,6 +6,7 @@ import {
 } from "../main/api";
 import type { ProblemType, SubmissonWithoutAllType } from "../types/base";
 import type { FetchUserSubmissionType } from "../types/apis";
+import getContestInfo from "./../logic/getContestInfo";
 
 const useProblems = () => {
   const [problems, setProblems] = useState<ProblemType[]>([]);
@@ -18,7 +19,7 @@ const useProblems = () => {
     }
   }, [setProblems]);
 
-  // 問題が追加されたらローカルストレージに問題データを追加する
+  // 問題が追加または更新されたらローカルストレージに問題データを追加する
   useEffect(() => {
     localStorage.setItem("array", JSON.stringify(problems));
   }, [problems]);
@@ -28,20 +29,10 @@ const useProblems = () => {
       // URLじゃなかったら例外を投げる
       try {
         const problemUrl = new URL(url);
-        if (problemUrl.hostname !== "atcoder.jp") {
-          throw new Error("Invalid URL");
-        }
-
-        const splitUrl = problemUrl.pathname.split("/");
-        const problemId = splitUrl.at(-1);
-        const contest = splitUrl.at(-3);
-        if(!problemId || !contest) {
-          throw new Error("Invalid URL");
-        }
+        const { contest, problemId } = getContestInfo(problemUrl);
 
         let submission: SubmissonWithoutAllType = "nosub";
         const userNameCopy = userName === "" ? "no user" : userName;
-
         const [problemData, problemDiff, userSubmission] = await Promise.all([
           fetchProblemData(problemId),
           fetchProblemDiff(problemId),

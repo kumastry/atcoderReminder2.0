@@ -115,7 +115,7 @@ const useProblems = () => {
         if (!fetchedSubmission) continue;
         for (const problem of problemsCopy) {
           if (fetchedSubmission.problem_id !== problem.problem_id) continue;
-          if (fetchedSubmission.result !== problem.sub) continue;
+          if (fetchedSubmission.result === problem.sub) continue;
           problem.sub = fetchedSubmission.result;
           isProblemSubmissionChanged = true;
         }

@@ -16,6 +16,7 @@ const useProblems = () => {
     if (localStorage.array) {
       const saveDate = JSON.parse(localStorage.array);
       setProblems(saveDate);
+      // リロードで回答状況を更新できる機能は要検討
     }
   }, [setProblems]);
 
@@ -85,6 +86,19 @@ const useProblems = () => {
     >();
 
     try {
+      // 過剰リクエストを防ぐための処置
+      const waitSec = 45;
+      const nowDate = Date.now();
+      const LatestDate = localStorage.getItem("LatestReloadDate");
+      if (LatestDate !== null) {
+        const diffTime = Math.floor((nowDate - Number(LatestDate)) / 1000);
+        if (diffTime <= waitSec) {
+          alert(`あと${String(waitSec - diffTime)}秒待ってください`);
+          return;
+        }
+      }
+      localStorage.setItem("LatestReloadDate", String(nowDate));
+
       for (const problem of problems) {
         if (problem.sub === "AC") continue; // ACだったら更新する必要なし
         submissionPromises.push(

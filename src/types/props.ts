@@ -6,7 +6,7 @@ import type {
   SubmissionDropdownType,
 } from "./base";
 
-type CardDetailType = Omit<ProblemType, "version" | "problem_id">;
+type CardDetailType = Omit<ProblemType, "problem_id">;
 
 export type CardPropsType = {
   cardDetail: CardDetailType;
@@ -19,6 +19,7 @@ export type FormPropsType = {
   addProblem: AddProblemType;
   setSubFilter: React.Dispatch<React.SetStateAction<SubmissionDropdownType>>;
   setDiffFilter: React.Dispatch<React.SetStateAction<DifficultyType>>;
+  reLoad: () => void;
 };
 
 export type ProblemSetPropsType = {

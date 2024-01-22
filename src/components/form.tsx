@@ -8,13 +8,9 @@ function Form({
   addProblem,
   setSubFilter,
   setDiffFilter,
+  reLoad,
 }: FormPropsType) {
   const [problemUrl, setProblemUrl] = useState("");
-
-  // 実装中
-  const reLoad = () => {
-    alert("実装中の機能です");
-  };
 
   const addProblemWithForm = () => {
     addProblem(userName, problemUrl);

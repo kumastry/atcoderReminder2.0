@@ -10,7 +10,7 @@ function Main(): React.JSX.Element {
   const [diffFilter, setDiffFilter] = useState<DifficultyType>("all");
 
   const { userName, setUserName } = useUserName();
-  const { problems, addProblem, deleteProblem } = useProblems();
+  const { problems, addProblem, deleteProblem, reLoad } = useProblems();
 
   console.log("main");
   return (
@@ -35,6 +35,7 @@ function Main(): React.JSX.Element {
         addProblem={addProblem}
         setSubFilter={setSubFilter}
         setDiffFilter={setDiffFilter}
+        reLoad={reLoad}
       />
 
       {/* 問題リスト */}

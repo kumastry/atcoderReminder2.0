@@ -32,7 +32,6 @@ export type ProblemType = {
   contest: string;
   sub: SubmissonWithoutAllType;
   user: string;
-  version: number;
 };
 
 export type AddProblemType = (userName: string, problemUrl: string) => void;

@@ -68,6 +68,9 @@ export async function fetchUserSubmission(
 
   if (!filteredUserSubmissions.length) return undefined;
 
+  // 提出が新しい順から
+  filteredUserSubmissions.reverse();
+
   // 一つの問題に対して複数の提出がある
   // 優先順位：AC > WA > TLE,MLE,CE
   const priorityResults = ["AC", "WA", "TLE", "MLE", "CE"];

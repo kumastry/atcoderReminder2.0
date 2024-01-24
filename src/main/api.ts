@@ -51,9 +51,25 @@ export async function fetchUserSubmission(
   userName: string,
   problem_Id: string,
 ): Promise<FetchUserSubmissionType | undefined> {
+
+  const newFromSecond = Math.floor(Date.now() / 1000) - 2592000; //現在時刻から30日前
+  const newSubmissions = await fetchUserSubmissionImpl(userName, problem_Id, newFromSecond);
+  if(newSubmissions) return newSubmissions;
+
+  const oldFromSecond = 1582988400; // 俺がatcoder始めた時間
+  const oldSubmissions = await fetchUserSubmissionImpl(userName, problem_Id, oldFromSecond);
+  if(oldSubmissions) return oldSubmissions;
+
+  return undefined;
+}
+
+async function fetchUserSubmissionImpl(
+  userName: string,
+  problem_Id: string,
+  fromSecond: number
+): Promise<FetchUserSubmissionType | undefined> {
   const allSubmissions = [] as FetchUserSubmissionType[];
 
-  let fromSecond = 1582988400; //2020/3/1 0時のunix時間 俺がatcoder始めた日にち
   for (;;) {
     const userSubmissions: FetchUserSubmissionType[] =
       await fetchPartialUserSubmissions(userName, fromSecond);
@@ -61,7 +77,9 @@ export async function fetchUserSubmission(
     allSubmissions.push(...userSubmissions);
     allSubmissions.sort((a, b) => a.epoch_second - b.epoch_second);
     fromSecond = allSubmissions[allSubmissions.length - 1].epoch_second + 1;
+    if(userSubmissions.length < 500) break;
   }
+
   const filteredUserSubmissions = allSubmissions.filter((item) => {
     return item.user_id === userName && item.problem_id === problem_Id;
   });

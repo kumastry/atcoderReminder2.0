@@ -63,7 +63,7 @@ function Form({
             >
               <option value="all">diffculity-All</option>
               <option value="gray">0-400(gray)</option>
-              <option value="brawn">400-800(brawn)</option>
+              <option value="brown">400-800(brown)</option>
               <option value="green">800-1200(green)</option>
               <option value="cyan">1200-1600(cyan)</option>
               <option value="blue">1600-2000(blue)</option>

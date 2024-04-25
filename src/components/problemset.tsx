@@ -1,7 +1,7 @@
 import Card from "./card";
 import type { ProblemSetPropsType } from "./../types/props";
 import { memo } from "react";
-import { filterByColor, filterByDiff } from "./../logic/filterCard";
+import { filterByColor, filterBySub } from "./../logic/filterCard";
 
 const ProblemSet = memo(
   ({
@@ -12,8 +12,8 @@ const ProblemSet = memo(
   }: ProblemSetPropsType): React.JSX.Element => {
     // フィルターが増えることを考慮してリファクタリングすべき
     const filteredProblems = problems
-      .filter((element) => filterByColor(element, diffFilter))
-      .filter((element) => filterByDiff(element, subFilter));
+      .filter((element) => filterByColor(element.diff, diffFilter))
+      .filter((element) => filterBySub(element.sub, subFilter));
 
     console.log("problem");
     return (

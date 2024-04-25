@@ -122,23 +122,23 @@ describe.concurrent("fillter by Submission test", () => {
     });
 
     test("AC to WA", () => {
-        expect(filterBySub("AC", "WA")).toEqual(false);
+      expect(filterBySub("AC", "WA")).toEqual(false);
     });
 
     test("nosub to WA", () => {
-        expect(filterBySub("nosub", "WA")).toEqual(false);
+      expect(filterBySub("nosub", "WA")).toEqual(false);
     });
 
     test("TLE to WA", () => {
-        expect(filterBySub("TLE", "WA")).toEqual(true);
+      expect(filterBySub("TLE", "WA")).toEqual(true);
     });
 
     test("MLE to WA", () => {
-        expect(filterBySub("MLE", "WA")).toEqual(true);
+      expect(filterBySub("MLE", "WA")).toEqual(true);
     });
 
     test("CE to WA", () => {
-        expect(filterBySub("CE", "WA")).toEqual(true);
+      expect(filterBySub("CE", "WA")).toEqual(true);
     });
   });
 
@@ -148,11 +148,11 @@ describe.concurrent("fillter by Submission test", () => {
     });
 
     test("AC to nosub", () => {
-        expect(filterBySub("AC", "nosub")).toEqual(false);
+      expect(filterBySub("AC", "nosub")).toEqual(false);
     });
 
     test("WA to nosub", () => {
-        expect(filterBySub("WA", "nosub")).toEqual(false);
+      expect(filterBySub("WA", "nosub")).toEqual(false);
     });
   });
 });

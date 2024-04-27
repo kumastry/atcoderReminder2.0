@@ -6,7 +6,7 @@ const getContestInfo = (url: URL) => {
   const problemId = splitUrl.at(-1);
   const contest = splitUrl.at(-3);
   if (!problemId || !contest) {
-    throw new Error("Invalid URL");
+    throw new Error("Wrong URL pathname");
   }
 
   return { contest, problemId };

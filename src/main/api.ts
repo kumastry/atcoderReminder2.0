@@ -41,6 +41,7 @@ export async function fetchUserSubmission(
   userName: string,
   problem_Id: string,
 ): Promise<FetchUserSubmissionType | undefined> {
+  // キャッシュ等でapiをたたく数を減らした方が良い
   const newFromSecond = Math.floor(Date.now() / 1000) - 2592000; //現在時刻から30日前
   const newSubmissions = await fetchUserSubmissionImpl(
     userName,

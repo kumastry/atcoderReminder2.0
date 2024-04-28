@@ -1,0 +1,70 @@
+export const problemData = [
+  {
+    id: "1202Contest_a",
+    contest_id: "DEGwer2023",
+    problem_index: "A",
+    name: "DEGwer's Doctoral Dissertation",
+    title: "A. DEGwer's Doctoral Dissertation",
+  },
+  {
+    id: "1202Contest_b",
+    contest_id: "DEGwer2023",
+    problem_index: "B",
+    name: "vs. DEGwer",
+    title: "B. vs. DEGwer",
+  },
+  {
+    id: "1202Contest_c",
+    contest_id: "DEGwer2023",
+    problem_index: "C",
+    name: "binarydigit",
+    title: "C. binarydigit",
+  },
+  {
+    id: "1202Contest_d",
+    contest_id: "DEGwer2023",
+    problem_index: "D",
+    name: "Coincidence",
+    title: "D. Coincidence",
+  },
+  {
+    id: "1202Contest_e",
+    contest_id: "DEGwer2023",
+    problem_index: "E",
+    name: "Half Palindromes",
+    title: "E. Half Palindromes",
+  },
+];
+
+export const problemsDiff = {
+  abc138_a: {
+    slope: -0.0007168608759555057,
+    intercept: 5.865100960838195,
+    variance: 0.926552668651041,
+    difficulty: -848,
+    discrimination: 0.004479398673070138,
+    irt_loglikelihood: -260.5412324380486,
+    irt_users: 4554,
+    is_experimental: false,
+  },
+  abc138_b: {
+    slope: -0.000824396428693272,
+    intercept: 6.368909012937863,
+    variance: 0.5230470966650067,
+    difficulty: -364,
+    discrimination: 0.004479398673070138,
+    irt_loglikelihood: -736.6811268411792,
+    irt_users: 4554,
+    is_experimental: false,
+  },
+  abc138_c: {
+    slope: -0.0008681111956810556,
+    intercept: 7.003321371802847,
+    variance: 0.40808430724507255,
+    difficulty: -96,
+    discrimination: 0.004479398673070138,
+    irt_loglikelihood: -1112.8355439379536,
+    irt_users: 4647,
+    is_experimental: false,
+  },
+};

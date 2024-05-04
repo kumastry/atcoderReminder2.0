@@ -15,9 +15,13 @@ describe("フッターテスト", () => {
     expect(screen.getByRole("contentinfo")).toBeInTheDocument;
   });
 
-//   test("リンクが存在しているのか", async () => {
-//     expect(screen.getByRole("button")).toBeInTheDocument;
-//   })
-
-
+  test("リンクが存在しているのか", async () => {
+    const linkElements = screen.getAllByRole("link");
+    expect(linkElements).toBeInTheDocument;
+    expect(linkElements[0]).toHaveAttribute("href", "https://x.com/kumastry1");
+    expect(linkElements[1]).toHaveAttribute(
+      "href",
+      "mailto:kumastry2212@gmail.com",
+    );
+  });
 });

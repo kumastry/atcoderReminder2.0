@@ -7,8 +7,11 @@ describe("ヘッダーテスト", () => {
   beforeEach(() => {
     render(<Header />);
   });
+
   test("ヘッダーに文字が表示されること", async () => {
-    expect(screen.getByText("AtCoder Reminder")).toBeInTheDocument;
+    const headerElement = screen.getByText("AtCoder Reminder");
+    expect(headerElement).toBeVisible();
+    expect(headerElement).toHaveTextContent("AtCoder Reminder");
   });
 
   test("ヘッダーに適切なロールが付与されているか", async () => {

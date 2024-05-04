@@ -6,7 +6,7 @@ import type {
   SubmissionDropdownType,
 } from "./base";
 
-type CardDetailType = Omit<ProblemType, "problem_id">;
+export type CardDetailType = Omit<ProblemType, "problem_id">;
 
 export type CardPropsType = {
   cardDetail: CardDetailType;

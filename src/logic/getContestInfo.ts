@@ -1,6 +1,6 @@
 const getContestInfo = (url: URL) => {
   if (url.hostname !== "atcoder.jp") {
-    throw new Error("Invalid URL");
+    throw new Error("this is not an atcoder URL");
   }
   const splitUrl = url.pathname.split("/");
   const problemId = splitUrl.at(-1);

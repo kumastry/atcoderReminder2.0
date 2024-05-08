@@ -60,9 +60,21 @@ const useProblems = () => {
         };
         setProblems([problemObj, ...problems]);
       } catch (e) {
-        if (e instanceof Error) {
-          console.log(e.message);
+        // error alert for users
+        if (e instanceof TypeError) {
+          let errMsg = e.message;
+          if (e.message === "Failed to fetch") {
+            errMsg +=
+              "\n" + "ネットワークを確認し、もう一度やり直してください。";
+          }
+          alert(errMsg);
+        } else if (e instanceof Error) {
           alert(e.message);
+        }
+
+        // error logger
+        if (e instanceof Error) {
+          console.error(e);
         }
       }
     },

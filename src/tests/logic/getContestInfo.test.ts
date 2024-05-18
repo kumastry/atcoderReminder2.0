@@ -2,10 +2,10 @@ import { describe, expect, test } from "vitest";
 import getContestInfo from "../../logic/getContestInfo";
 
 describe.concurrent("get contest infomation from URL test", () => {
-  test("not atcoder.jp URL to throwing error as Invalid URL", () => {
+  test("not atcoder.jp URL to throwing error as this is not an atcoder URL", () => {
     expect(() =>
       getContestInfo(new URL("https://twitter.com/home")),
-    ).toThrowError(/^Invalid URL$/);
+    ).toThrowError(/^this is not an atcoder URL$/);
   });
 
   test("not atcoder.jp URL to throwing error as Invalid URL", () => {

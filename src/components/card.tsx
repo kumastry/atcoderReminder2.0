@@ -17,7 +17,7 @@ function Card({
       key={id}
     >
       <div className="card-content">
-        <p className="title is-5">
+        <div className="title is-5">
           <span>
             <button
               className="delete is-large is-pulled-right"
@@ -28,7 +28,7 @@ function Card({
             <p>{cardDetail.contest + " " + cardDetail.title}</p>
             <p>{String(cardDetail.diff)}</p>
           </a>
-        </p>
+        </div>
         <p className="subtitle is-6">{cardDetail.user}</p>
       </div>
     </div>

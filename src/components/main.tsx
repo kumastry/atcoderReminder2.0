@@ -16,6 +16,7 @@ function Main(): React.JSX.Element {
   return (
     <div>
       {/* ユーザーネーム入力欄 */}
+      {/* コンポーネントとして分割予定 */}
       <nav className="navbar" role="navigation" aria-label="main nabigation">
         <div className="navbar-brand">
           <input
@@ -39,14 +40,13 @@ function Main(): React.JSX.Element {
       />
 
       {/* 問題リスト */}
-      <section className="section">
-        <ProblemSet
-          problems={problems}
-          deleteProblem={deleteProblem}
-          diffFilter={diffFilter}
-          subFilter={subFilter}
-        />
-      </section>
+
+      <ProblemSet
+        problems={problems}
+        deleteProblem={deleteProblem}
+        diffFilter={diffFilter}
+        subFilter={subFilter}
+      />
     </div>
   );
 }

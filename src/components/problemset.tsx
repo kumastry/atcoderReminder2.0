@@ -17,19 +17,21 @@ const ProblemSet = memo(
 
     console.log("problem");
     return (
-      <ul className="is-vertical-center">
-        {filteredProblems.map((element, key: number) => {
-          return (
-            <li key={key}>
-              <Card
-                cardDetail={element}
-                id={key}
-                deleteProblem={deleteProblem}
-              />
-            </li>
-          );
-        })}
-      </ul>
+      <section className="section">
+        <ul className="is-vertical-center">
+          {filteredProblems.map((element, key: number) => {
+            return (
+              <li key={key}>
+                <Card
+                  cardDetail={element}
+                  id={key}
+                  deleteProblem={deleteProblem}
+                />
+              </li>
+            );
+          })}
+        </ul>
+      </section>
     );
   },
 );

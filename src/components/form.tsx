@@ -1,7 +1,8 @@
 import { useState, useContext } from "react";
 import type { FormPropsType } from "./../types/props";
 import { AddButtonLoadingContext } from "./../contexts/loadingContext";
-
+import { IoMdAdd } from "react-icons/io";
+import { IoReload } from "react-icons/io5";
 import type { SubmissionDropdownType, DifficultyType } from "./../types/base";
 
 function Form({
@@ -50,7 +51,9 @@ function Form({
             }`}
             onClick={addProblemWithForm}
           >
-            Add
+            <span className="icon">
+              <IoMdAdd />
+            </span>
           </button>
         </form>
 
@@ -86,7 +89,9 @@ function Form({
 
         {/* コンポーネント化 */}
         <button className="button" onClick={reLoad}>
-          <span>Reload</span>
+          <span className="icon">
+            <IoReload />
+          </span>
         </button>
       </section>
     </>

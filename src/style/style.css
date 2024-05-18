@@ -13,6 +13,7 @@
 .problem-form {
   display: flex;
   flex-direction: row;
+  margin-bottom: 3px;
 }
 
 .problem-form > input {
@@ -26,7 +27,7 @@
 
 @media screen and (max-width: 720px) {
   .form-section {
-   --bulma-section-padding: 2rem 2rem 0rem 2rem;
+    --bulma-section-padding: 2rem 2rem 0rem 2rem;
     padding: var(--bulma-section-padding);
   }
 }

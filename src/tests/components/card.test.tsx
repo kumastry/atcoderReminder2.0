@@ -22,7 +22,7 @@ describe("問題カードテスト", () => {
   });
 
   test("カードにユーザ名が表示されている", async () => {
-    const element = screen.getByText("user:" + cardDetail.user);
+    const element = screen.getByText(cardDetail.user);
     expect(element).toBeVisible();
   });
 
@@ -37,15 +37,11 @@ describe("問題カードテスト", () => {
     expect(linkElement).toHaveTextContent(
       cardDetail.contest + " " + cardDetail.title,
     );
-    expect(linkElement).toHaveTextContent(
-      "diff:" + cardDetail.diff + " submission:" + cardDetail.sub,
-    );
+    expect(linkElement).toHaveTextContent(String(cardDetail.diff));
   });
 
   // スタイルはcssファイルでやるかもしれないので、削除するのもあり
-  test("カードの背景色が茶色", async () => {
-
-  });
+  // test("カードの背景色が茶色", async () => {});
 
   test("カードのdeleteボタンを押したら関数が実行", async () => {
     const buttonElement = screen.getByRole("button");

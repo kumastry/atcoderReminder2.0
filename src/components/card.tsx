@@ -19,24 +19,18 @@ function Card({
     >
       <div className="card-content">
         <p className="title">
+          <span>
+            <button
+              className="delete is-large is-pulled-right"
+              onClick={() => deleteProblem(id)}
+            ></button>
+          </span>
           <a href={cardDetail.url} target="_black">
-            {cardDetail.contest + " " + cardDetail.title}
-            <br />
-            {"diff:" + cardDetail.diff + " submission:" + cardDetail.sub}
-            <br />
+            <p>{cardDetail.contest + " " + cardDetail.title}</p>
+            <p>{String(cardDetail.diff)}</p>
           </a>
         </p>
-
-        <p className="subtitle">user:{cardDetail.user}</p>
-
-        <footer className="card-footer">
-          <input
-            type="button"
-            value="delete"
-            className="card-footer-item"
-            onClick={() => deleteProblem(id)}
-          />
-        </footer>
+        <p className="subtitle">{cardDetail.user}</p>
       </div>
     </div>
   );

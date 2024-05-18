@@ -49,7 +49,6 @@ function Form({
           Add Problem
         </button>
 
-
         {/* コンポーネント化 */}
         <div className="select is-success is-active ">
           <select

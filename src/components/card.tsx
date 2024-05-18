@@ -12,13 +12,12 @@ function Card({
     <div
       className="card"
       style={{
-        margin: "8px",
         backgroundColor: getCardBackgroundColor(cardDetail.sub),
       }}
       key={id}
     >
       <div className="card-content">
-        <p className="title">
+        <p className="title is-5">
           <span>
             <button
               className="delete is-large is-pulled-right"
@@ -30,7 +29,7 @@ function Card({
             <p>{String(cardDetail.diff)}</p>
           </a>
         </p>
-        <p className="subtitle">{cardDetail.user}</p>
+        <p className="subtitle is-6">{cardDetail.user}</p>
       </div>
     </div>
   );

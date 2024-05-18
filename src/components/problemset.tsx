@@ -19,10 +19,10 @@ const ProblemSet = memo(
     return (
       <section className="section">
         {filteredProblems.length ? (
-          <ul className="is-vertical-center">
+          <ul className="problem_list">
             {filteredProblems.map((element, key: number) => {
               return (
-                <li key={key}>
+                <li className="problem_list_element" key={key}>
                   <Card
                     cardDetail={element}
                     id={key}

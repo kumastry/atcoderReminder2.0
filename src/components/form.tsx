@@ -15,39 +15,44 @@ function Form({
   const isLoading = useContext(AddButtonLoadingContext);
 
   const addProblemWithForm = () => {
-    addProblem(userName, problemUrl);
-    setProblemUrl("");
+    if (problemUrl.trim().length) {
+      addProblem(userName, problemUrl);
+      setProblemUrl("");
+    }
   };
+
+  document
+    .querySelector(".form-section")
+    ?.addEventListener("submit", (event) => {
+      event.preventDefault();
+    });
 
   console.log("form");
   return (
     <>
-      <section className="section">
-        {/* コンポーネント化 */}
-        <button className="button" onClick={reLoad} style={{ float: "left" }}>
-          <span>Reload</span>
-        </button>
-
+      <section className="section form-section">
         {/* formタグで書き直す */}
-        <input
-          className="input"
-          type="text"
-          placeholder="Problem URL"
-          value={problemUrl}
-          onChange={(e) => setProblemUrl(e.target.value)}
-          onKeyDown={(e) => {
-            e.key === "Enter" && addProblemWithForm();
-          }}
-        />
+        <form className="problem-form">
+          <input
+            className="input"
+            type="text"
+            placeholder="Problem URL"
+            value={problemUrl}
+            onChange={(e) => setProblemUrl(e.target.value)}
+            onKeyDown={(e) => {
+              e.key === "Enter" && addProblemWithForm(e);
+            }}
+          />
 
-        <button
-          className={`button is-fullwidth is-success is-light ${
-            isLoading && "is-loading"
-          }`}
-          onClick={addProblemWithForm}
-        >
-          Add Problem
-        </button>
+          <button
+            className={`button is-success is-light ${
+              isLoading ? "is-loading" : ""
+            }`}
+            onClick={addProblemWithForm}
+          >
+            Add
+          </button>
+        </form>
 
         {/* コンポーネント化 */}
         <div className="select is-success is-active ">
@@ -78,6 +83,11 @@ function Form({
             <option value="red">2800-∞(red)</option>
           </select>
         </div>
+
+        {/* コンポーネント化 */}
+        <button className="button" onClick={reLoad}>
+          <span>Reload</span>
+        </button>
       </section>
     </>
   );

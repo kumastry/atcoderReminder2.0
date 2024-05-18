@@ -1,4 +1,32 @@
-.is-vertical-center {
-  display: block;
+.problem_list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+}
+
+.problem_list_element {
+  margin-bottom: 1em;
+  width: 75%;
+}
+
+.problem-form {
+  display: flex;
+  flex-direction: row;
+}
+
+.problem-form > input {
+  flex-grow: 2;
+}
+
+.form-section {
+  --bulma-section-padding: 2rem 10rem 0rem 10rem;
+  padding: var(--bulma-section-padding);
+}
+
+@media screen and (max-width: 720px) {
+  .form-section {
+   --bulma-section-padding: 2rem 2rem 0rem 2rem;
+    padding: var(--bulma-section-padding);
+  }
 }

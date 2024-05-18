@@ -10,6 +10,8 @@ import getContestInfo from "./../logic/getContestInfo";
 
 const useProblems = () => {
   const [problems, setProblems] = useState<ProblemType[]>([]);
+  const [isAddButtonLoading, setIsAddButtonLoading] = useState(false);
+  const [isReloadButtonLoading, setIsReloadButtonLoading] = useState(false);
 
   // ローカルストレージから問題データを取り出す
   useEffect(() => {
@@ -28,6 +30,7 @@ const useProblems = () => {
   const addProblem = useCallback(
     async (userName: string, url: string) => {
       // URLじゃなかったら例外を投げる
+      setIsAddButtonLoading(true);
       try {
         const problemUrl = new URL(url.trim());
         const { contest, problemId } = getContestInfo(problemUrl);
@@ -77,6 +80,7 @@ const useProblems = () => {
           console.error(e);
         }
       }
+      setIsAddButtonLoading(false);
     },
     [problems],
   );
@@ -93,6 +97,7 @@ const useProblems = () => {
   // 回答状況だけを更新する
   // apiからsubだけを更新する
   const reLoad = async () => {
+    setIsReloadButtonLoading(true);
     const submissionPromises = new Array<
       Promise<FetchUserSubmissionType | undefined>
     >();
@@ -145,9 +150,18 @@ const useProblems = () => {
         alert(e.message);
       }
     }
+    setIsReloadButtonLoading(false);
   };
 
-  return { problems, setProblems, addProblem, deleteProblem, reLoad };
+  return {
+    problems,
+    setProblems,
+    addProblem,
+    deleteProblem,
+    reLoad,
+    isAddButtonLoading,
+    isReloadButtonLoading,
+  };
 };
 
 export default useProblems;

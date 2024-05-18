@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import type { FormPropsType } from "./../types/props";
+import { AddButtonLoadingContext } from "./../contexts/loadingContext";
 
 import type { SubmissionDropdownType, DifficultyType } from "./../types/base";
 
@@ -11,6 +12,7 @@ function Form({
   reLoad,
 }: FormPropsType) {
   const [problemUrl, setProblemUrl] = useState("");
+  const isLoading = useContext(AddButtonLoadingContext);
 
   const addProblemWithForm = () => {
     addProblem(userName, problemUrl);
@@ -39,7 +41,9 @@ function Form({
         />
 
         <button
-          className="button is-fullwidth is-success is-light"
+          className={`button is-fullwidth is-success is-light ${
+            isLoading && "is-loading"
+          }`}
           onClick={addProblemWithForm}
         >
           Add Problem

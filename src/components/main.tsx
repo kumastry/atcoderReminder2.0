@@ -4,13 +4,15 @@ import ProblemSet from "./problemset";
 import useUserName from "./../hooks/useUserName";
 import useProblems from "./../hooks/useProblems";
 import type { SubmissionDropdownType, DifficultyType } from "./../types/base";
+import { AddButtonLoadingContext } from "./../contexts/loadingContext";
 
 function Main(): React.JSX.Element {
   const [subFilter, setSubFilter] = useState<SubmissionDropdownType>("all");
   const [diffFilter, setDiffFilter] = useState<DifficultyType>("all");
 
   const { userName, setUserName } = useUserName();
-  const { problems, addProblem, deleteProblem, reLoad } = useProblems();
+  const { problems, addProblem, deleteProblem, reLoad, isAddButtonLoading } =
+    useProblems();
 
   console.log("main");
   return (
@@ -31,13 +33,15 @@ function Main(): React.JSX.Element {
       </nav>
 
       {/*URLフォーム*/}
-      <Form
-        userName={userName}
-        addProblem={addProblem}
-        setSubFilter={setSubFilter}
-        setDiffFilter={setDiffFilter}
-        reLoad={reLoad}
-      />
+      <AddButtonLoadingContext.Provider value={isAddButtonLoading}>
+        <Form
+          userName={userName}
+          addProblem={addProblem}
+          setSubFilter={setSubFilter}
+          setDiffFilter={setDiffFilter}
+          reLoad={reLoad}
+        />
+      </AddButtonLoadingContext.Provider>
 
       {/* 問題リスト */}
       <ProblemSet

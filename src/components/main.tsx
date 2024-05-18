@@ -14,7 +14,7 @@ function Main(): React.JSX.Element {
 
   console.log("main");
   return (
-    <div>
+    <main>
       {/* ユーザーネーム入力欄 */}
       {/* コンポーネントとして分割予定 */}
       <nav className="navbar" role="navigation" aria-label="main nabigation">
@@ -40,14 +40,13 @@ function Main(): React.JSX.Element {
       />
 
       {/* 問題リスト */}
-
       <ProblemSet
         problems={problems}
         deleteProblem={deleteProblem}
         diffFilter={diffFilter}
         subFilter={subFilter}
       />
-    </div>
+    </main>
   );
 }
 

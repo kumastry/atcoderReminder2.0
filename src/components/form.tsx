@@ -41,7 +41,7 @@ function Form({
             value={problemUrl}
             onChange={(e) => setProblemUrl(e.target.value)}
             onKeyDown={(e) => {
-              e.key === "Enter" && addProblemWithForm(e);
+              e.key === "Enter" && addProblemWithForm();
             }}
           />
 

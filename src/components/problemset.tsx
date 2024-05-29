@@ -28,24 +28,26 @@ const ProblemSet = memo(
         />
 
         {filteredProblems.length ? (
-          <ul className={layout === "list" ? "problem_list" : "grid"}>
-            {filteredProblems.map((element, key: number) => {
-              return (
-                <li
-                  className={
-                    layout === "list" ? "problem_list_element" : "cell"
-                  }
-                  key={key}
-                >
-                  <Card
-                    cardDetail={element}
-                    id={key}
-                    deleteProblem={deleteProblem}
-                  />
-                </li>
-              );
-            })}
-          </ul>
+          <div className="fixed-grid has-4-cols">
+            <ul className={layout === "list" ? "problem_list" : "grid"}>
+              {filteredProblems.map((element, key: number) => {
+                return (
+                  <li
+                    className={
+                      layout === "list" ? "problem_list_element" : "cell"
+                    }
+                    key={key}
+                  >
+                    <Card
+                      cardDetail={element}
+                      id={key}
+                      deleteProblem={deleteProblem}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         ) : (
           <p>Problems not found</p>
         )}

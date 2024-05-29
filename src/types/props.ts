@@ -4,6 +4,7 @@ import type {
   AddProblemType,
   DeleteProblemType,
   SubmissionDropdownType,
+  LayoutType,
 } from "./base";
 
 export type CardDetailType = Omit<ProblemType, "problem_id">;
@@ -27,4 +28,9 @@ export type ProblemSetPropsType = {
   deleteProblem: DeleteProblemType;
   subFilter: SubmissionDropdownType;
   diffFilter: DifficultyType;
+};
+
+export type LayoutButtonsProps = {
+  layout: LayoutType;
+  onClickLayoutHandler: (problemLayout: LayoutType) => void;
 };

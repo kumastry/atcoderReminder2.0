@@ -37,3 +37,5 @@ export type ProblemType = {
 export type AddProblemType = (userName: string, problemUrl: string) => void;
 
 export type DeleteProblemType = (key: number) => void;
+
+export type LayoutType = "list" | "grid" | undefined;

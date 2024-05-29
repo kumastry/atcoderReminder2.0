@@ -31,3 +31,9 @@
     padding: var(--bulma-section-padding);
   }
 }
+
+.layout_buttons {
+  text-align: right;
+  margin-bottom: 3rem;
+  margin-right: 5rem;
+}

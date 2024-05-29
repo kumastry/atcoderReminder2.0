@@ -4,6 +4,7 @@ import { memo } from "react";
 import { filterByColor, filterBySub } from "./../logic/filterCard";
 import useLayoutButtons from "./../hooks/useLayoutButtons";
 import LayoutButtons from "./layoutButtons";
+import ProblemsNotFound from "./problemsNotFound";
 
 const ProblemSet = memo(
   ({
@@ -49,7 +50,7 @@ const ProblemSet = memo(
             </ul>
           </div>
         ) : (
-          <p>Problems not found</p>
+          <ProblemsNotFound />
         )}
       </section>
     );

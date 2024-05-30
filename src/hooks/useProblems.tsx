@@ -7,6 +7,7 @@ import {
 import type { ProblemType, SubmissonWithoutAllType } from "../types/base";
 import type { FetchUserSubmissionType } from "../types/apis";
 import getContestInfo from "./../logic/getContestInfo";
+import { toast } from "bulma-toast";
 
 const useProblems = () => {
   const [problems, setProblems] = useState<ProblemType[]>([]);
@@ -62,18 +63,35 @@ const useProblems = () => {
           user: userNameCopy,
         };
         setProblems([problemObj, ...problems]);
+
+        toast({
+          message: "<p><strong>Problem Added                   </strong></p>",
+          type: "is-success",
+          position: "bottom-center",
+          dismissible: true,
+          pauseOnHover: true,
+        });
       } catch (e) {
         // error alert for users
+        let notificationMsg = "";
         if (e instanceof TypeError) {
           let errMsg = e.message;
           if (e.message === "Failed to fetch") {
             errMsg +=
               "\n" + "ネットワークを確認し、もう一度やり直してください。";
           }
-          alert(errMsg);
+          notificationMsg = errMsg;
         } else if (e instanceof Error) {
-          alert(e.message);
+          notificationMsg = e.message;
         }
+
+        toast({
+          message: `<p><strong>${notificationMsg}                     </strong></p>`,
+          type: "is-danger",
+          position: "bottom-center",
+          dismissible: true,
+          pauseOnHover: true,
+        });
 
         // error logger
         if (e instanceof Error) {
@@ -90,6 +108,14 @@ const useProblems = () => {
       const problemsCopy = [...problems];
       problemsCopy.splice(key, 1);
       setProblems(problemsCopy);
+
+      toast({
+        message: `<p><strong>Problem Deleted                  </strong></p>`,
+        type: "is-success",
+        position: "bottom-center",
+        dismissible: true,
+        pauseOnHover: true,
+      });
     },
     [problems],
   );

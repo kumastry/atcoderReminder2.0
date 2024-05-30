@@ -13,7 +13,6 @@
 .problem-form {
   display: flex;
   flex-direction: row;
-  margin-bottom: 3px;
 }
 
 .problem-form > input {
@@ -36,4 +35,8 @@
   text-align: right;
   margin-bottom: 3rem;
   margin-right: 5rem;
+}
+
+.userid-bar {
+  border-bottom: 1px solid lightgray;
 }

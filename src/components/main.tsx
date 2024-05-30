@@ -19,16 +19,26 @@ function Main(): React.JSX.Element {
     <main>
       {/* ユーザーネーム入力欄 */}
       {/* コンポーネントとして分割予定 */}
-      <nav className="navbar" role="navigation" aria-label="main nabigation">
+      <nav
+        className="navbar userid-bar"
+        role="navigation"
+        aria-label="main nabigation"
+      >
         <div className="navbar-brand">
-          <input
-            className="navbar-item"
-            id="userform"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            type="text"
-            placeholder="Username"
-          ></input>
+          <div className="navbar-item">
+            <input
+              className="input"
+              id="userform"
+              type="text"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+              placeholder="User ID"
+            ></input>
+          </div>
+
+          <div className="navbar-item">
+            <button className="button is-success is-dark">Done</button>
+          </div>
         </div>
       </nav>
 

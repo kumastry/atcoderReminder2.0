@@ -35,10 +35,6 @@ function Main(): React.JSX.Element {
               placeholder="User ID"
             ></input>
           </div>
-
-          <div className="navbar-item">
-            <button className="button is-success is-dark">Done</button>
-          </div>
         </div>
       </nav>
 
